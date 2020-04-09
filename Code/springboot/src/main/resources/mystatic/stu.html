@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+   var page=1;
+   var tp=0;
+   $(function(){
+    show();
+    });
+    
+   function upPage(){
+    if(page>1){
+     page--;
+     show();
+    }
+    
+   }
+   
+   function downPage(){
+    if(page<tp){
+     page++;
+     show();
+    }
+   } 
+   
+   function show(){
+    $.ajax({
+    	url:'http://localhost:8888/st
+     /* url:'http://localhost:8888/stu/s/query?page='+page, */
+     success:function(result){
+      var rel=result.content;
+      tp=result.totalPages;
+      var htmlStr="<table width='80%' algin='center' border='1'>"+
+      "<tr><th>ID</th><th>姓名</th><th>年龄</th><th>性别</th><th>操作</th></tr>";
+      for(var i=0;i<rel.length;i++){
+       var stu=rel[i];
+       htmlStr+="<tr><td>"+stu.id+"</td><td>"+stu.name+"</td><td>"+stu.age+"</td><td>"+stu.sex+"</td>"+
+       "<td><a href=''>编辑</a>&nbsp;<a href='http://localhost:8888/stu/s/del/"+stu.id+"'>删除</a></td></tr>";
+      }
+      
+      htmlStr+="</table>";
+      $("#show").html(htmlStr);
+     }
+    });
+   }
+   
+  </script>
+ </head>
+ <body>
+  <h1 style="text-align: center">学生管理系统</h1>
+  <hr>
+  <a href="add.html">添加学生</a>
+  <div id="show">
+  </div>
+  <a href="javascript:upPage()">上一页</a>&nbsp;&nbsp;<a href="javascript:downPage()">下一页</a>
+ </body>
+</html>

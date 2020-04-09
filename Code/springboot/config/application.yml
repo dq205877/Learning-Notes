@@ -1,0 +1,14 @@
+#server:
+#  port: 8885
+spring:
+  datasource:
+    username: root
+    password: 12345678
+    url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver 
+#    initialSize:20
+#    minIdle:50
+#    maxActive:500
+  restart: 
+    exclude: /static/**,/template/**
+  
