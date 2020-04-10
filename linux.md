@@ -61,3 +61,62 @@ tools:secureCRT  control centos   up and down: yum -y install lrzsz
 DNS1:114.114.114.114   电信
 DNS2:8.8.8.8  google
 
+
+
+SecureCRT
+
+plugins:    yum install lrzsz
+
+ cd /tem, mouse move windows file,Zmodem...   transtation files
+
+
+
+JDK install:
+
+exe:rpm
+
+rar:tar.gz
+
+ rpm -ivh jdk-filename
+
+/usr         the default install folder
+
+vi /etc/profile    envir
+
+append
+
+export JAVA_HOME=/user/java/jdk1.8..-amd
+
+export CLASSPATH=$JAVA_HOME$\lib:$CLASSPATH
+
+export PATH=$JAVA_HOME$\bin:$PATH
+
+source /etc/profile
+
+java -version
+
+
+
+group
+
+totally clone
+
+main others 
+
+1、rom cutdown
+
+2、ip/uuid/hostname mapping change or delete                will genera restart
+
+/etc/udev/rule.d/70-persistent-net.rules  delete  if remain will reserve the rule in the up
+
+3、mapping
+
+window/linux linux/linux
+
+
+
+
+
+usually cmd:
+
+pwd  --show current directory
