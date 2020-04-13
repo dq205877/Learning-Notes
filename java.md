@@ -1,4 +1,4 @@
-​										Spring Boot
+										Spring Boot
 
 1、微服务：一个项目 可以由多个 小型服务构成（微服务）
 2、Spring boot可以快速开发 微服务模块
@@ -66,7 +66,9 @@ webapps/index.jsp
 
 
 
-​										Spring Cloud
+```
+                                     Spring Cloud
+```
 
 springcloud
 1、Eureka(AP) *		注册中心
@@ -171,3 +173,19 @@ Nacos  注册中心+配置中心+服务总线
 Sentinel		服务熔器
 
 Seata		分布式事务
+
+
+
+```
+											Redis
+```
+
+Redis是一款基于键值对的NoSQL数据库，它的值支持多种数据结构：
+
+字符串（strings)、哈希（hashes）、列表（lists）、集合（sets）、有序集合（sorted sets）等。
+
+Redis将所有的数据都存放在内在中，所以它的读写性能十分惊人。
+
+同时，Redis还可以将内在中的数据以快照或日志的形式保存到硬盘上，以保证数据的安全性。
+
+Redis典型的应用场景包括：缓存、排行榜、计数器、社交网络、消息队列等。
