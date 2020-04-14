@@ -1,4 +1,4 @@
-1、tools(VM10+CentOs6.8)
+##### 1、tools(VM10+CentOs6.8)
 
 https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.2-1744117.exe
 
@@ -6,15 +6,18 @@ VM10key:https://zhidao.baidu.com/question/607052953.html?qbl=relate_question_7&w
 
 http://archive.kernel.org/centos-vault/6.8/isos/x86_64/CentOS-6.8-x86_64-bin-DVD1.iso
 
-2、net settings
+##### 2、net settings
 
 linux net work：
 NAT
 子网：192.168.XX.0
 网关：VM8和linux统一 192.168.XX.1
 
-①网卡修改:
+###### ①网卡修改:
+
+```shell
 vi /etc/sysconfig/network-scripts/ifcfg-eth0 
+```
 
 update or append
 
@@ -27,22 +30,38 @@ BROADCAST=192.168.3.255
 
 static：IP不变了
 
-②
+###### ②
+
 192.168.3.128 》hostname 用本地域名访问IP
 windows  C/windows/system32/drivers/etc/hosts 
-centos  vi /etc/hosts
+centos  
+
+```shell
+vi /etc/hosts
+```
+
 append 192.168.3.128 hostname
 
-③net work:
+###### ③net work:
+
+```shell
 service NetworkManager stop
 /etc/init.d/network restart
 chkconfig NetworkManager off
-vi /etc/resolv.conf                        append       nameserver 192.168.3.128
+vi /etc/resolv.conf  
+```
+
+​                      append       nameserver 192.168.3.128
+
+```shell
 service network restart
-ping www.baidu.com    finished0.0
+ping www.baidu.com 
+```
 
+   finished0.0
 
-stop firewalls:
+###### stop firewalls:
+
 service iptables stop
 chkconfig iptables off         //关闭自启
 service iptables status
@@ -63,7 +82,7 @@ DNS2:8.8.8.8  google
 
 
 
-SecureCRT
+###### SecureCRT
 
 plugins:    yum install lrzsz
 
@@ -71,7 +90,7 @@ plugins:    yum install lrzsz
 
 
 
-JDK install:
+###### JDK install:
 
 exe:rpm
 
@@ -91,13 +110,15 @@ export CLASSPATH=$JAVA_HOME$\lib:$CLASSPATH
 
 export PATH=$JAVA_HOME$\bin:$PATH
 
-source /etc/profile
-
-java -version
 
 
+source /etc/profile        --refresh file
 
-group
+java -version             --check java env
+
+
+
+###### group
 
 totally clone
 
@@ -115,8 +136,46 @@ window/linux linux/linux
 
 
 
+###### Docker install:
+
+uname -r       --up 3.10
+
+yum update     --refresh core
+
+yum install docker      --install docker
+
+systemctl start docker  -- start docker
+
+docker -v      --check docker version
+
+systemctl enable docker  -- boot start
 
 
-usually cmd:
 
-pwd  --show current directory
+
+
+
+
+##### usually cmd:
+
+```shell
+pwd
+```
+
+  --show current directory
+
+```
+uname -r     --core version
+ps aux|grep tomcat
+
+ssh root@192.160.3.111
+
+df -lh
+
+ll
+
+ls
+
+cd ..
+```
+

@@ -44,15 +44,12 @@ NK间隙锁：行级，使用范围条件时（WHERE），对范围内不存在�
 
 ###### 两个事务时
 
-  		IS		IX		S		X
-
-IS				 	 				 no
-
-IX							no	  no
-
-S				    no               no
-
-X		no       no     no     no
+|      | IS   | IX   | S    | X    |
+| ---- | ---- | ---- | ---- | ---- |
+| IS   |      |      |      | no   |
+| IX   |      |      | no   | no   |
+| S    |      | no   |      | no   |
+| X    | no   | no   | no   | no   |
 
 ###### 加锁
 

@@ -1,3 +1,25 @@
+```
+									Spring
+```
+
+###### Spring Ioc
+
+Invension of Control
+
+​	-控制反转，是一种面向对象编程的设计思想。
+
+Dependency Injection
+
+​	-依赖注入，是IoC思想的实现方式。
+
+IoC Container
+
+​	-IoC窗口，是实现依赖注入的关键，本质上是一个工厂。
+
+###### Spring AOP
+
+###### Spring MVC
+
 										Spring Boot
 
 1、微服务：一个项目 可以由多个 小型服务构成（微服务）
