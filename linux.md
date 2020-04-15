@@ -179,3 +179,40 @@ ls
 cd ..
 ```
 
+改名：mv oldname newname
+复制：cp -a oldfile newfile
+显示编辑：vi file
+ps -aux
+ps -aux | grep tomcat
+
+vi:
+按ESC键 跳到命令模式，然后：
+:w 保存文件但不退出vi
+:w file 将修改另外保存到file中，不退出vi
+:w! 强制保存，不推出vi
+:wq 保存文件并退出vi
+:wq! 强制保存文件，并退出vi
+q: 不保存文件，退出vi
+:q! 不保存文件，强制退出vi
+:e! 放弃所有修改，从上次保存文件开始再编辑
+
+解压：
+tar –xvf file.tar  解压 tar包
+tar -xzvf file.tar.gz 解压tar.gz
+tar -xjvf file.tar.bz2   解压 tar.bz2
+tar –xZvf file.tar.Z   解压tar.Z
+unrar e file.rar 解压rar
+unzip file.zip 解压zip
+
+查看日志
+tail -f catalina.out
+
+/home/apache-tomcat-7.0.85-ps15044/bin/shutdown.sh
+
+cd /home/apache-tomcat-7.0.85-9002/bin  && ./startup.sh
+
+kill -9 [PID] 通过PID杀死某个进程
+
+find . -type f -size +100M   查找当前目录下文件大小
+
+nslookup www.sohu.com

@@ -4,4 +4,14 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 
 ​                                                                                                                      —— [Thomas A. Edison]
 
-​																	
+墨菲定律（Murphy's Law）主要内容有四个方面：
+
+一、任何事都没有表面看起来那么简单；
+
+二、所有的事都会比你预计的时间长；
+
+三、会出错的事总会出错；
+
+四、如果你担心某种情况发生，那么它就更有可能发生。
+
+“墨菲定律”的根本内容是“凡是可能出错的事有很大几率会出错”，指的是任何一个事件，只要具有大于零的机率，就不能够假设它不会发生。
