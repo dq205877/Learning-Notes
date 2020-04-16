@@ -1,5 +1,73 @@
 ![JVM memory](D:\Git-Center\Learning-Notes\source\static\images\JAVA-memory.png)
 
+![JVM memory](https://github.com/dq205877/Learning-Notes/blob/master/source/static/images/JAVA-memory.png)
+
+方法区/堆   虚拟机栈/本地方法栈/程序计数器
+
+半初始化
+
+源码：
+
+```java
+class T{
+
+int m =8;
+
+}
+
+T t = new T();
+```
+
+汇编码：
+
+```
+0  new #2<T>
+
+3 dup
+
+4 invokespecial #3<T.<init>>
+
+7 astore_1
+
+8 return
+```
+
+申请内存
+
+dup复制一份  因为invokespecial消耗引用
+
+构造方法
+
+指向
+
+返回
+
+0时m=0：半初始化
+
+DCL（double check lock)  
+
+###### volatitle(1、可见性； 2、禁止指令重排序)
+
+上两个一起使用，可避免半初始化。
+
+###### 对象定位（1、句柄（间接） 2、直接指针）
+
+new object()          markword  /class pointer/   instance data/ padding
+
+new int[4]             markword  /class pointer/  length / instance data/ padding
+
+栈上分配（没有逃逸(线程内使用)，没有其他对象和方法引用）对象直接在栈上分配。
+
+线程本地分配-Eden-ServivorFrom-markword(age)-SurvirorTo-Permanant
+
+JVM memory:最大最小内存一致，避免系统资源浪费
+
+-XX:+UseCompaperssedClassPointers 压缩指针
+
+4字节寻址：可能是32G，48G可能不压缩了，直接膨胀了。所以越大不一定更好（没有压缩效果了）
+
+
+
 ###### 如何确定垃圾可回收
 
 引用计数法 
@@ -114,7 +182,7 @@ JVM 类加载机制分为五个部分：加载，验证，准备，解析，初�
 
 偏向锁默认打开。
 
-无锁－偏向－自旋（E(读取)，E(期望)，A(实际)）－轻量默认10次－重量－（C++monitor对象）
+###### 无锁－偏向－自旋（E(读取)，E(期望)，A(实际)）【轻量默认10次】－重量－（C++monitor对象）
 
 偏向monitorcenter monitorexit
 
