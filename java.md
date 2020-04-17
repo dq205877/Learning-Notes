@@ -190,7 +190,79 @@ JVM 类加载机制分为五个部分：加载，验证，准备，解析，初�
 
 C++monitor对象引用
 
+线程
 
+线程相关的基本方法有 wait，notify，notifyAll，sleep，join，yield 等。
+
+![image-20200418001343249](D:\Git-Center\Learning-Notes\source\static\images\Thread.png)
+
+wait  WATING状态  sleep  TIMED-WATING状态 显然，sleep是定时等待，不释放锁。
+
+yield让步  优先级高的可能性大，不绝对，OS不一定对线程优先级敏感。
+
+interrupt中断  给信号，会改变标志位，不改状态。
+
+1. 调用 interrupt()方法并不会中断一个正在运行的线程。也就是说处于 Running 状态的线 程并不会因为被中断而被终止，仅仅改变了内部维护的中断标识位而已。 
+2. 若调用 sleep()而使线程处于 TIMED-WATING 状态，这时调用 interrupt()方法，会抛出 InterruptedException,从而使线程提前结束 TIMED-WATING 状态。 
+3. 许多声明抛出 InterruptedException 的方法(如 Thread.sleep(long mills 方法))，抛出异 常前，都会**清除**中断标识位，所以抛出异常后，调用 isInterrupted()方法将会返回 **false**。
+4. 中断状态是线程固有的一个标识位，可以通过此标识位安全的终止线程。比如,你想终止 一个线程 thread 的时候，可以调用 thread.interrupt()方法，在线程的 run 方法**内部**可以 根据 thread.isInterrupted()的值来**优雅**的终止线程。
+
+join 等待其他线程终止，当前线程调用则阻塞，另一线程结束，当前线程就绪。（应用：主线程要结束，调join(),会等子线程结束后结束。）
+
+notify 唤醒对象监视器中其中一个幸运线程（死锁警告）；notifyAll();所有
+
+
+
+其他方法： 1. sleep()：强迫一个线程睡眠Ｎ毫秒。 2. isAlive()： 判断一个线程是否存活。 3. join()： 等待线程终止。 4. activeCount()： 程序中活跃的线程数。 5. enumerate()： 枚举程序中的线程。 6. currentThread()： 得到当前线程。 7. isDaemon()： 一个线程是否为守护线程。 8. setDaemon()： 设置一个线程为守护线程。(用户线程和守护线程的区别在于，是否等待主线 程依赖于主线程结束而结束) 9. setName()： 为线程设置一个名称。 10. wait()： 强迫一个线程等待。 13/04/2018 Page 75 of 283 11. notify()： 通知一个线程继续运行。 12. setPriority()： 设置一个线程的优先级。 13. getPriority():：获得一个线程的优先级。
+
+任务的状态保存**及**再加载, 这段过程就叫做 **上下文切换**。
+
+
+
+线程池**主要**特点：**线程复用**；**控制最大并发数；管理线程**
+
+我们可以继承重写 Thread 类，在其 start 方法中添加不断循环调用传递过来的 Runnable 对象。 这就是线程池的**实现原理**。循环方法中不断获取 Runnable 是用 Queue 实现的，在获取下一个 Runnable 之前**可以**是阻塞的。（**线程复用**）
+
+线程池的组成 
+
+一般的线程池主要分为以下 4 个组成部分： 
+
+1. 线程池管理器：用于创建并管理线程池 
+2. 工作线程：线程池中的线程 
+3.  任务接口：每个任务必须实现的接口，用于工作线程调度其运行 
+4. 任务队列：用于存放待处理的任务，提供一种缓冲机制 Java 中的线程池是通过 Executor 框架实现的，该框架中用到了 Executor，Executors， ExecutorService，ThreadPoolExecutor ，Callable 和 Future、FutureTask 这几个类。
+
+ThreadPoolExecutor 的构造方法如下： 
+
+```java
+public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue workQueue) { 
+
+this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, Executors.defaultThreadFactory(), defaultHandler); 
+
+}
+```
+
+1. corePoolSize：指定了线程池中的线程数量。 
+2.  maximumPoolSize：指定了线程池中的最大线程数量。 
+3. keepAliveTime：当前线程池数量超过 corePoolSize 时，多余的空闲线程的存活时间，即多 次时间内会被销毁。 
+4. unit：keepAliveTime 的单位。 
+5. workQueue：任务队列，被提交但尚未被执行的任务。
+6. threadFactory：线程工厂，用于创建线程，一般用默认的即可。
+7. handler：拒绝策略，当任务太多来不及处理，如何拒绝任务。
+
+四种线程池
+
+Executor 顶级接口 执行工具
+
+ExecutorService  线程池真正接口
+
+newCachedThreadPool
+
+newFixedThreadPool
+
+newScheduledThreadPool
+
+newSingleThreadExecutor
 
 ```
 									Spring
