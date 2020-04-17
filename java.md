@@ -405,3 +405,49 @@ Redis将所有的数据都存放在内在中，所以它的读写性能十分惊
 同时，Redis还可以将内在中的数据以快照或日志的形式保存到硬盘上，以保证数据的安全性。
 
 Redis典型的应用场景包括：缓存、排行榜、计数器、社交网络、消息队列等。
+
+### 											JSR－107
+
+#### Application
+
+#### CachingProvider 
+
+#### CacheManager
+
+#### Cache
+
+#### Entry<K,V>         Expiry
+
+
+
+Cache
+
+缓存接口，定义缓存操作。实现有：RedisCache、EhCacheCache、ConcurrentMapCache等
+
+CacheManager
+
+缓存管理器，管理各种缓存（Cache）组件
+
+@Cacheable
+
+主要针对方法配置，能够根据方法的请求参数对其结果进行缓存
+
+@CacheEvict
+
+清空缓存
+
+@CachePut
+
+保证方法被调用，又希望结果被缓存（更新缓存）
+
+@EnableCaching
+
+开启基于注解的缓存
+
+keyGenerator
+
+缓存数据时key生成策略
+
+serlialize
+
+缓存数据时value序列化策略
