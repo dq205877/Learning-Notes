@@ -207,9 +207,9 @@ unzip file.zip 解压zip
 查看日志
 tail -f catalina.out
 
-/home/apache-tomcat-7.0.85-ps15044/bin/shutdown.sh
+/home/tomcat/bin/shutdown.sh
 
-cd /home/apache-tomcat-7.0.85-9002/bin  && ./startup.sh
+cd /home/tomcat/bin  && ./startup.sh
 
 kill -9 [PID] 通过PID杀死某个进程
 

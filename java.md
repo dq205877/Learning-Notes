@@ -284,6 +284,85 @@ IoC Container
 
 ###### Spring AOP
 
+定义
+
+面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。
+
+优点
+
+利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
+
+原理
+
+aop底层将采用代理机制进行实现。
+
+接口 + 实现类：spring 默认采用 jdk 的动态代理 Proxy。
+
+实现类：spring 默认采用 cglib 字节码增强。
+
+
+
+target：目标类，需要被代理的类。例如：UserService
+
+Joinpoint：连接点，是指那些可能被拦截到的方法。例如：所有的方法
+
+PointCut：切入点，已经被增强的连接点。例如：addUser()
+
+advice： 通知/增强，增强代码。例如：after、before
+
+Weaving：织入，是指把 advice 应用到 target 来创建代理对象的过程。
+
+proxy： 代理类
+
+Aspect: 切面，是切入点 pointcut 和通知 advice 的结合
+ 一个线是一个特殊的面。
+ 一个切入点和一个通知，组成成一个特殊的面。
+
+
+
+org.aopalliance.aop.Advice
+
+根据目标类方法的连接点位置划分：
+
+前置 MethodBeforeAdvice
+
+后置 AfterReturningAdvice
+
+环绕 MethodInterceptor
+
+异常 ThrowsAdvice
+
+引介 IntroductionInterceptor  添加新行为和属性
+
+### AspectJ
+
+#### 介绍
+
+- AspectJ 是一个基于 Java 语言的 AOP 框架
+- Spring2.0 以后新增了对 AspectJ 切点表达式支持
+- `@AspectJ` 是 AspectJ1.5 新增功能，通过 JDK5 注解技术，允许直接在 Bean 类中定义切面
+   新版本 Spring 框架，建议使用 AspectJ 方式来开发 AOP
+- 主要用途：自定义开发
+
+**before: 前置通知(校验)**
+ 在方法执行前执行，如果通知抛出异常，阻止方法运行
+
+**afterReturning: 后置通知(数据处理)**
+ 方法正常返回后执行，如果方法中抛出异常，通知无法执行
+ 必须在方法执行后才执行，所以可以获得方法的返回值。
+
+**around: 环绕通知(十分强大，可以做任何事情)**
+ 方法执行前后分别执行，可以阻止方法的执行
+ 必须手动执行目标方法
+
+**afterThrowing: 抛出异常通知(包装异常信息)**
+ 方法抛出异常后执行，如果方法没有抛出异常，无法执行
+
+**after: 最终通知(清理现场)**
+ 方法执行完毕后执行，无论方法中是否出现异常
+
+
+
 ###### Spring MVC
 
 										Spring Boot
