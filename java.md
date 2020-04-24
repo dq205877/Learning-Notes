@@ -1,3 +1,7 @@
+人际交往+技术本质+业务深度+行业应用天花板＝年薪
+追踪到C，到数据库，到OS。
+
+
 ![JVM memory](D:\Git-Center\Learning-Notes\source\static\images\JAVA-memory.png)
 
 ![JVM memory](https://github.com/dq205877/Learning-Notes/blob/master/source/static/images/JAVA-memory.png)
@@ -314,11 +318,17 @@ IoC Container
 原理
 
 aop底层将采用代理机制进行实现。
+作用
+日志：方法执行时间，追踪问题
+事务：两个方法不相关但业务需要是在同一事务中，回滚一套业务。比如：下单后商品没有抢到，则需要将商品和下单两块回滚。
 
 接口 + 实现类：spring 默认采用 jdk 的动态代理 Proxy。
 
 实现类：spring 默认采用 cglib 字节码增强。
+ConcureentHashMap存储IOC对象，Class>byte Array(not IO a class)
 
+
+放到IOC的时候已经是代理对象了。即初始化IOC时。
 
 
 target：目标类，需要被代理的类。例如：UserService
