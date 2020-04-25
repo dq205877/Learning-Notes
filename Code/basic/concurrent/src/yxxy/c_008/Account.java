@@ -14,14 +14,14 @@ public class Account {
 	
 	public synchronized void set(String name, double balance) {
 		this.name = name;
-		/*
+/*
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		*/
-		
+*/
+
 		this.balance = balance;
 	}
 	

@@ -647,3 +647,44 @@ TCP  三次握手，四次挥手
 喂/我听到了/我也听到了。
 
 喂，我下班了/我等下也下班了/我下班了/好的
+
+
+
+
+
+POI/EasyExcel
+
+POI
+
+WorkBook>Sheet>Row>Cell
+
+HSSFWorkbook         XSSFWorkbook     SXSSFWorkbook(临时文件关闭)
+
+读取不同类型数据！！！
+
+公式要注意（）
+
+```java
+FormulaEvaluator evaluator = workbook.getCreationHelper()
+                  .createFormulaEvaluator();
+
+CellValue cellValue = evaluator.evaluate(cell);//我理解为这是正则表达式 matches();
+```
+
+| HSSF | Microsoft Excel       | 03  65535 limit |
+| ---- | --------------------- | --------------- |
+| XSSF | Microsoft Excel OOXML | 07  slow>memory |
+| HWPF | Microsoft Word        |                 |
+| HSLF | Microsoft PowerPoint  |                 |
+| HDGF | Microsoft Visio       |                 |
+
+EasyExcel
+
+https://www.yuque.com/easyexcel/doc/read
+
+https://github.com/alibaba/easyexcel
+
+
+
+
+

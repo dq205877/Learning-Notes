@@ -12,7 +12,7 @@
 
 4、c_004
 
-static synchonized(this,T.class)   不行，反射T.class就是好多this,静态方法不用对象
+static synchronized(this,T.class)   不行，反射T.class就是好多this,静态方法不用对象
 
 5、c_005
 
@@ -27,3 +27,13 @@ static synchonized(this,T.class)   不行，反射T.class就是好多this,静态
 非加锁方法可正常执行，因为本身都不用申请对象锁
 
 27：32 tips
+
+8、c_008
+
+读不加锁写加锁有脏读
+
+9、c_009
+
+加锁方法再执行加锁方法是可以的synchronized是重入锁
+
+10、c_010
