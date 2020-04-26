@@ -1,6 +1,62 @@
 人际交往+技术本质+业务深度+行业应用天花板＝年薪
 追踪到C，到数据库，到OS。
 
+算法：解决方案：
+
+特性  输入：输出：有穷性、确定性、可行性
+
+基本要求：正确性、可读性、健壮性、时间复杂度、空间复杂度
+
+数据结构：
+
+线性结构：数组、栈、队列、单链表、循环链表、双链表、递归（斐波那契（前两项和是第三个数值）、汉诺塔）、排序算法
+
+链表：单链（注意上节点和下节点）、循环链（单向/无根节点，圆）、双向循环链（圆环，双向）
+
+斐波那契
+
+```java
+// 1   1   2   3    5   8
+public static int fb(int positionNum){
+	if(positionNum<1){
+		return 0;//入参不合适
+	}
+    if(positionNum=1 | positionNum=2){
+     return 1;
+    }else{
+		return fb(positionNum-1)+fb(positionNum-2);
+    }
+}
+```
+
+汉诺塔
+
+树结构：二叉树、红黑树、Hash表、B-Tree
+
+二叉树：树深度太长；
+
+红黑树:
+
+Hash表:
+
+B-Tree:
+
+- 叶节点具有相同的深度，叶节点的指针为空
+
+- 所有索引元素不重复
+
+- 节点中的数据索引从左到右递增排列
+
+B+Tree:
+
+- 非叶子节点不存储data，只存储索引（冗余），可以放更多的索引
+
+- 叶子节点包含所有索引字段
+
+- 叶子节点用指针连接，提高区间访问的性能
+
+
+
 
 ![JVM memory](D:\Git-Center\Learning-Notes\source\static\images\JAVA-memory.png)
 
@@ -683,6 +739,10 @@ EasyExcel
 https://www.yuque.com/easyexcel/doc/read
 
 https://github.com/alibaba/easyexcel
+
+
+
+轻量 Undertow /Jetty/tomcat  重量 JBoss/wildfly:default Undertow
 
 
 
