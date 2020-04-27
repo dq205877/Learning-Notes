@@ -4,6 +4,16 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 
 ​                                                                                                                      —— [Thomas A. Edison]
 
+君子求诸己，小人求诸人。——孔子
+
+是指具有君子品行的人，遇到问题先从自身找原因，而那些小人，出现麻烦总是想方设法推卸责任，撇清自己，从不会去[反思](https://baike.baidu.com/item/反思/35707)自己，从自身找原因。
+
+
+
+小富靠勤 中富靠德 大富靠命
+
+
+
 墨菲定律（Murphy's Law）主要内容有四个方面：
 
 一、任何事都没有表面看起来那么简单；
