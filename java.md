@@ -361,6 +361,56 @@ IoC Container
 
 ​	-IoC窗口，是实现依赖注入的关键，本质上是一个工厂。
 
+```
+// TransactionDefinition.java
+
+// ========== 支持当前事务的情况 ========== 
+
+/**
+ * 如果当前存在事务，则使用该事务。
+ * 如果当前没有事务，则创建一个新的事务。
+ */
+int PROPAGATION_REQUIRED = 0;
+/**
+ * 如果当前存在事务，则使用该事务。
+ * 如果当前没有事务，则以非事务的方式继续运行。
+ */
+int PROPAGATION_SUPPORTS = 1;
+/**
+ * 如果当前存在事务，则使用该事务。
+ * 如果当前没有事务，则抛出异常。
+ */
+int PROPAGATION_MANDATORY = 2;
+
+// ========== 不支持当前事务的情况 ========== 
+
+/**
+ * 创建一个新的事务。
+ * 如果当前存在事务，则把当前事务挂起。
+ */
+int PROPAGATION_REQUIRES_NEW = 3;
+/**
+ * 以非事务方式运行。
+ * 如果当前存在事务，则把当前事务挂起。
+ */
+int PROPAGATION_NOT_SUPPORTED = 4;
+/**
+ * 以非事务方式运行。
+ * 如果当前存在事务，则抛出异常。
+ */
+int PROPAGATION_NEVER = 5;
+
+// ========== 其他情况 ========== 
+
+/**
+ * 如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行。
+ * 如果当前没有事务，则等价于 {@link TransactionDefinition#PROPAGATION_REQUIRED}
+ */
+int PROPAGATION_NESTED = 6;
+```
+
+
+
 ###### Spring AOP
 
 定义

@@ -14,6 +14,12 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 
 
 
+药医不死病  佛度有缘人
+
+世间两个学问最难   仏学 易经  要么非常聪明的人学，要么没文化的人学好！南老。
+
+
+
 墨菲定律（Murphy's Law）主要内容有四个方面：
 
 一、任何事都没有表面看起来那么简单；
