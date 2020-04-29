@@ -343,6 +343,14 @@ newScheduledThreadPool
 
 newSingleThreadExecutor
 
+
+
+并发三大部分
+
+**Synchronizer（同步器）/同步容器/ThreadPool、executor**
+
+
+
 ```
 									Spring
 ```
@@ -796,5 +804,4 @@ https://github.com/alibaba/easyexcel
 
 
 
-
-
+Redis/Boot/Cloud

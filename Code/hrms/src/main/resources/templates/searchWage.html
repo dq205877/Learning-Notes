@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="学生管理系统"/>
+    <meta name="keywords" content="学生管理系统"/>
+    <meta name="author" content="LANG"/>
+
+    <!--<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
+
+    <title>查询工资信息-HRMS</title>
+
+    <!--mdui css-->
+    <link th:href="@{/lib_web/mdui/css/mdui.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .mdui-checkbox {
+            padding-right: 10px;
+        }
+
+        .mdui-p-a-1 {
+            min-width: 60px;
+        }
+    </style>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a href="javascript:" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer'}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <p>哈信息人力资源管理系统</p>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:window.location.reload();" class="mdui-btn mdui-btn-icon"><i
+                class="mdui-icon material-icons">refresh</i></a>
+    </div>
+</header>
+
+<nav class="mdui-drawer mdui-card" id="left-drawer">
+    <div class="mdui-card-media">
+        <img th:src="@{/image/card.jpg}"/>
+        <div class="mdui-card-media-covered">
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title" sec:authentication="name">舒露</div>
+                <div class="mdui-card-primary-subtitle">欢迎</div>
+            </div>
+        </div>
+    </div>
+    <ul class="mdui-list mdui-card-content" mdui-collapse="{accordion: true}">
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item" sec:authorize="hasAuthority('ADMIN')">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+                <div class="mdui-list-item-content">职工信息管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffInfo/search}" class="mdui-list-item mdui-ripple">查询职工信息</a>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/index/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item mdui-collapse-item-open">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">attach_money</i>
+                <div class="mdui-list-item-content">职工工资管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffWage/search}" class="mdui-list-item mdui-ripple mdui-list-item-active">查询工资信息</a>
+                <a th:href="@{/staffWage/add}" class="mdui-list-item mdui-ripple" sec:authorize="hasAuthority('ADMIN')">添加工资信息</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postTitle" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature_people</i>
+            <a th:href="${'/manage/#/postTitle'}" class="mdui-list-item-content">岗位名称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postCategory" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature</i>
+            <a th:href="${'/manage/#/postCategory'}" class="mdui-list-item-content">岗位类别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobTitle" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">accessibility</i>
+            <a th:href="${'/manage/#/jobTitle'}" class="mdui-list-item-content">社会职称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobLevel" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">bubble_chart</i>
+            <a th:href="${'/manage/#/jobLevel'}" class="mdui-list-item-content">职称级别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="employmentForm" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
+            <a th:href="${'/manage/#/employmentForm'}" class="mdui-list-item-content">用工形式管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="department" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">transfer_within_a_station</i>
+            <a th:href="${'/manage/#/department'}" class="mdui-list-item-content">部门信息管理</a>
+        </li>
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item" sec:authorize="hasAuthority('ADMIN')">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">equalizer</i>
+                <div class="mdui-list-item-content">基层单位管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/grassroot/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <label class="mdui-switch">
+                <input type="checkbox" id="night_mode"/>
+                <i class="mdui-switch-icon"></i>
+            </label>
+            <div class="mdui-list-item-content">夜间模式</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple" sec:authorize="hasAuthority('ADMIN')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+            <a href="" class="mdui-list-item-content">系统设置</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">vpn_key</i>
+            <a th:href="@{/logout}" class="mdui-list-item-content">注销登陆</a>
+        </li>
+    </ul>
+</nav>
+<section class="mdui-container-fluid">
+
+    <form id="search_form" th:action="@{/studentLeave/searchLeave}" method="get">
+        <div class="mdui-table-fluid">
+            <table id="search_table" class="mdui-table" style="width: 100%">
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-6">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <i class="mdui-icon material-icons">account_box</i>
+                            <label class="mdui-textfield-label" id="show_info">请输入要查询的姓名</label>
+                            <input name="name" type="text" class="mdui-textfield-input"/>
+                        </div>
+                    </td>
+                    <td class="mdui-col-xs-6">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <i class="mdui-icon material-icons">crop_landscape</i>
+                            <label class="mdui-textfield-label">请输入要查询的身份证号</label>
+                            <input name="nid" type="text" class="mdui-textfield-input"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-1"><p class="mdui-p-a-1">社会职称:</p></td>
+                    <td class="mdui-col-xs-11" id="_jobTitle">
+                        <a href="javascript:clearChecked('_jobTitle')" style="margin-right: 30px"
+                           class="mdui-btn mdui-ripple"
+                        >不限</a>
+                        <label class="mdui-checkbox" th:each="jobTitle:${jobTitleInfoList}">
+                            <input name="jobTitle" type="checkbox" th:value="${jobTitle.id}"/>
+                            <i class="mdui-checkbox-icon"></i>
+                            <span th:text="${jobTitle.name}"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-2"><p class="mdui-p-a-1">部门:</p></td>
+                    <td class="mdui-col-xs-10" id="_department">
+                        <label class="mdui-checkbox" th:each="department:${departmentList}">
+                            <input name="department" type="checkbox" th:data-index="${departmentStat.index}"
+                                   th:data-name="${department.name}"
+                                   th:value="${department.id}"/>
+                            <i class="mdui-checkbox-icon"></i>
+                            <span th:text="${department.name}"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-2"><p class="mdui-p-a-1">时间:</p></td>
+                    <td class="mdui-col-xs-10" id="_time">
+                        <label class="mdui-checkbox" th:each="wageYear:${wageYears}">
+                            <input name="year" type="checkbox" th:data-index="${wageYearStat.index}"
+                                   th:data-name="${wageYear}"
+                                   th:value="${wageYear}"/>
+                            <i class="mdui-checkbox-icon"></i>
+                            <span th:text="${wageYear}"></span>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div class="mdui-typo">
+        <hr/>
+    </div>
+    <div class="mdui-progress mdui-hidden" id="loading_progress">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
+    <div class="mdui-table-fluid data-table mdui-hidden">
+        <table id="result" class="mdui-table mdui-table-selectable mdui-table-hoverable">
+            <thead>
+            <tr>
+                <th style="min-width: 115px">姓名</th>
+                <th style="min-width: 210px">身份证号</th>
+                <th style="min-width: 135px">年月</th>
+                <th mdui-tooltip="{content: '岗位工资+绩效工资+职务津贴+岗位超时补助', position: 'top'}">小计1</th>
+                <th style="min-width: 115px">补款</th>
+                <th>扣款</th>
+                <th>小计2</th>
+                <th>教学奖金</th>
+                <th>带学生津贴</th>
+                <th>奖金</th>
+                <th>校拨津贴</th>
+                <th>教师节津贴</th>
+                <th>加班补助</th>
+                <th>值班补助</th>
+                <th>其他补助</th>
+                <th>补助小计</th>
+                <th>工资合计</th>
+                <th>代扣养老保险</th>
+                <th>代扣医疗保险</th>
+                <th>代扣失业保险</th>
+                <th>代扣住房公积金</th>
+                <th>应发额</th>
+                <th>代扣款</th>
+                <th>个人所得税</th>
+                <th>税后实发</th>
+                <th>单位承担养老保险</th>
+                <th>单位承担医疗保险</th>
+                <th>单位承担工伤保险</th>
+                <th>单位承担生育保险</th>
+                <th>单位承担失业保险</th>
+                <th>单位承担住房公积金</th>
+            </tr>
+            </thead>
+            <tbody id="table_data"></tbody>
+        </table>
+    </div>
+    <div class="mdui-card data-table mdui-hidden">
+        <div class="mdui-card-content">
+            <button id="down_select_btn" onclick="down_select()"
+                    class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" disabled>选中下载
+            </button>
+            <button id="del_select_btn" onclick="del_select(false)"
+                    class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" disabled>选中删除
+            </button>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="show_alert">
+        <div class="mdui-dialog-title">确定删除吗?</div>
+        <div class="mdui-dialog-content">这会删除该条工资信息!</div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
+            <button class="mdui-btn mdui-ripple" onclick="del_select(true)" mdui-dialog-close>确认</button>
+        </div>
+    </div>
+    <button onclick="search()" class="mdui-fab mdui-color-theme-accent mdui-ripple mdui-fab-fixed"><i
+            class="mdui-icon material-icons">search</i></button>
+</section>
+<script th:src="@{/lib_web/jquery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/lib_web/mdui/js/mdui.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/lib_web/datepicker/WdatePicker.js}"></script>
+<script th:inline="javascript">
+    'use strict';
+    /*日期格式化方法*/
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+
+    $(function () {
+        //部门基层单位联动
+        var departmentList = [[${departmentList}]];
+        $('#_department').find("input[type='checkbox']").each(function () {
+            var that = $(this);
+            $(that).click(function () {
+                if ($(that).prop("checked")) {
+                    $('#search_table').append("<tr id='gr-" + $(that).val() + "' class=\"mdui-m-t-5\"><td class=\"mdui-col-xs-2\"><p class=\"mdui-p-a-1\">" + $(that).data('name') + "部门:</p></td><td id='grassroots-" + $(that).val() + "' class=\"mdui-col-xs-10\"></td></tr>");
+                    for (var i = 0; i < departmentList[$(that).data('index')].grassroots.length; i++) {
+                        $('#grassroots-' + $(that).val()).append("<label class=\"mdui-checkbox\"><input name=\"grassroot\" type=\"checkbox\" value='" + departmentList[$(that).data('index')].grassroots[i].id + "'/><i class=\"mdui-checkbox-icon\"></i><span>" + departmentList[$(that).data('index')].grassroots[i].name + "</span></label>");
+                    }
+                } else {
+                    $('#gr-' + $(that).val()).remove();
+                }
+            })
+        });
+
+        $('#_time').find("input[type='checkbox']").each(function () {
+            var that = $(this);
+            $(that).click(function () {
+                if ($(that).prop("checked")) {
+                    $('#search_table').append("<tr id='ti-" + $(that).val() + "' class=\"mdui-m-t-5\"><td class=\"mdui-col-xs-2\"><p class=\"mdui-p-a-1\">" + $(that).val() + "年月份:</p></td><td class=\"mdui-col-xs-10\" id=\"trr-" + $(that).val() + "\"></td></tr>")
+                    for (var i = 1; i < 13; i++) {
+                        $('#trr-' + $(that).val()).append("<label class=\"mdui-checkbox\"><input name=\"month\" type=\"checkbox\" value=\"" + $(that).val() + "-" + i + "\"/><i class=\"mdui-checkbox-icon\"></i><span>" + i + "月</span></label>");
+                    }
+                } else {
+                    $('#ti-' + $(that).val()).remove();
+                }
+            });
+        })
+
+
+    });
+
+    function after() {
+        /*根据复选框是否选中设置按钮是否可用*/
+        var $downSelectBtn = $('#down_select_btn');
+        var $delSelectBtn = $('#del_select_btn');
+        $("thead .mdui-checkbox input:checkbox").click(function () {
+            if ($(this).prop('checked')) {
+                $downSelectBtn.removeAttr('disabled');
+                $delSelectBtn.removeAttr('disabled');
+            } else {
+                $downSelectBtn.attr("disabled", "disabled");
+                $delSelectBtn.attr("disabled", "disabled");
+            }
+        });
+        $('tbody .mdui-checkbox input:checkbox').click(function () {
+            var hasChecked = false;
+            $('.mdui-checkbox input:checkbox').each(function () {
+                if ($(this).prop('checked')) {
+                    hasChecked = true;
+                }
+            });
+            if (hasChecked) {
+                $downSelectBtn.removeAttr('disabled');
+                $delSelectBtn.removeAttr('disabled');
+            } else {
+                $downSelectBtn.attr("disabled", "disabled");
+                $delSelectBtn.attr("disabled", "disabled");
+            }
+        });
+    }
+
+    /*取消选择*/
+    function clearChecked(id) {
+        $('#' + id).find("input[type=checkbox]").prop('checked', false);
+    }
+
+    //进度条状态
+    function progressStatus(b) {
+        var $loadingProgress = $("#loading_progress");
+        if (b) {
+            $loadingProgress.removeClass("mdui-hidden");
+        } else {
+            $loadingProgress.addClass("mdui-hidden");
+        }
+    }
+
+    function show_tables(b) {
+        var $data = $('.data-table');
+        if (b) {
+            $data.removeClass("mdui-hidden");
+        } else {
+            $data.addClass("mdui-hidden");
+        }
+    }
+
+    function search() {
+        var $searchForm = $('#search_form');
+        for (var i = 0; i < $searchForm.serializeArray().length; i++) {
+            if ($searchForm.serializeArray()[i].value !== "") {
+                progressStatus(true);
+                show_tables(false);
+                $.get('/staffWage/searchWage?' + $searchForm.serialize(), function (data) {
+                    $("#table_data").html("");
+                    if (data.code === 500) {
+                        mdui.snackbar({
+                            message: data.msg
+                        });
+                        progressStatus(false);
+                        return;
+                    }
+                    if (data.wageList.length !== 0) {
+                        $.each(data.wageList, function (i, n) {
+                            $("#table_data").append("<tr id='" + n.id + "' data-id='" + n.id + "'><td>" + n.staff.name + "</td><td>" + n.staff.nid + "</td><td>" + n.year + "年" + n.month.substring(5) + "月</td>\n" +
+                                "<td mdui-tooltip=\"{content: '" + (n.staff.wage !== null ? n.staff.wage : 0) + "+" + (n.staff.performancePay !== null ? n.staff.performancePay : 0) + "+" + (n.staff.dutyAllowance !== null ? n.staff.dutyAllowance : 0) + "+" + (n.staff.grants !== null ? n.staff.grants : 0) + "', position: 'bottom'}\">" + n.total1 + "</td>\n" +
+                                "<td>" + n.replenishment + "</td><td>" + n.chargeBack + "</td><td>" + n.total2 + "</td><td>" + n.teachingBonus + "</td><td>" + n.studentAllowance + "</td><td>" + n.bonus + "</td>\n" +
+                                "<td>" + n.schoolGrant + "</td><td>" + n.teacherDayAllowance + "</td><td>" + n.overtimeAssistance + "</td><td>" + n.onDutySubsidies + "</td><td>" + n.otherBenefits + "</td>\n" +
+                                "<td>" + n.totalBenefits + "</td><td>" + n.total + "</td><td>" + n.pensionInsurance + "</td><td>" + n.medicalInsurance + "</td><td>" + n.unemploymentInsurance + "</td>\n" +
+                                "<td>" + n.housingFund + "</td><td>" + n.shouldMade + "</td><td>" + n.withholding + "</td><td>" + n.personalIncomeTax + "</td><td>" + n.afterTaxRealHair + "</td>\n" +
+                                "<td>" + n.unitPensionInsurance + "</td><td>" + n.unitMedicalInsurance + "</td><td>" + n.unitInjuryInsurance + "</td>\n" +
+                                "<td>" + n.unitMaternityInsurance + "</td><td>" + n.unitUnemploymentInsurance + "</td><td>" + n.unitHousingFund + "</td></tr>")
+                        });
+                        $("#table_data").append("<tr><td colspan='3' class='mdui-text-center'>统计求和:</td>\n" +
+                            "<td mdui-tooltip=\"{content: '" + data.sumWage.staff.wage + "+" + data.sumWage.staff.performancePay + "+" + data.sumWage.staff.dutyAllowance + "+" + data.sumWage.staff.grants + "', position: 'bottom'}\">" + data.sumWage.total1 + "</td>\n" +
+                            "<td>" + data.sumWage.replenishment + "</td><td>" + data.sumWage.chargeBack + "</td><td>" + data.sumWage.total2 + "</td><td>" + data.sumWage.teachingBonus + "</td><td>" + data.sumWage.studentAllowance + "</td><td>" + data.sumWage.bonus + "</td>\data.sumWage" +
+                            "<td>" + data.sumWage.schoolGrant + "</td><td>" + data.sumWage.teacherDayAllowance + "</td><td>" + data.sumWage.overtimeAssistance + "</td><td>" + data.sumWage.onDutySubsidies + "</td><td>" + data.sumWage.otherBenefits + "</td>\data.sumWage" +
+                            "<td>" + data.sumWage.totalBenefits + "</td><td>" + data.sumWage.total + "</td><td>" + data.sumWage.pensionInsurance + "</td><td>" + data.sumWage.medicalInsurance + "</td><td>" + data.sumWage.unemploymentInsurance + "</td>\data.sumWage" +
+                            "<td>" + data.sumWage.housingFund + "</td><td>" + data.sumWage.shouldMade + "</td><td>" + data.sumWage.withholding + "</td><td>" + data.sumWage.personalIncomeTax + "</td><td>" + data.sumWage.afterTaxRealHair + "</td>\data.sumWage" +
+                            "<td>" + data.sumWage.unitPensionInsurance + "</td><td>" + data.sumWage.unitMedicalInsurance + "</td><td>" + data.sumWage.unitInjuryInsurance + "</td>\data.sumWage" +
+                            "<td>" + data.sumWage.unitMaternityInsurance + "</td><td>" + data.sumWage.unitUnemploymentInsurance + "</td><td>" + data.sumWage.unitHousingFund + "</td></tr>");
+                        show_tables(true);
+                        mdui.updateTables();
+                        after();
+                    }
+                    progressStatus(false);
+                });
+                break;
+            }
+        }
+    }
+
+    function del_select(b) {
+        if (b) {
+            $('.mdui-table-row-selected').each(function () {
+                var del_id = $(this).data('id');
+                console.log('删除-->' + del_id);
+                $.get("/staffWage/del/" + del_id, function (data) {
+                    if (data.code === 200) {
+                        console.log('删除-->' + del_id + "成功");
+                        $('#' + del_id).remove();
+                    } else {
+                        alert('删除-->' + del_id + "失败\nCODE:" + data.code + "\nMSG:" + data.msg + "\nURL:" + data.url);
+                        console.error('删除-->' + del_id + "失败\nCODE:" + data.code + "\nMSG:" + data.msg + "\nURL:" + data.url);
+                    }
+                });
+            });
+        } else {
+            new mdui.Dialog('#show_alert').open();
+        }
+    }
+
+    /*下载选中*/
+    function down_select() {
+        var downId = "";
+        $('.mdui-table-row-selected').each(function () {
+            var data = $(this).data('id');
+            if (data !== undefined) {
+                downId += data + "-";
+            }
+        });
+        window.open("/staffWage/down?id=" + downId.substring(0, downId.length - 1), "_blank");
+    }
+</script>
+</body>
+</html>

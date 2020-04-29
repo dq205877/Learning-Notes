@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="学生管理系统"/>
+    <meta name="keywords" content="学生管理系统"/>
+    <meta name="author" content="LANG"/>
+
+    <!--<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
+
+    <title>添加工资信息-HRMS</title>
+
+    <!--mdui css-->
+    <link th:href="@{/lib_web/mdui/css/mdui.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .mdui-radio {
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a href="javascript:" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer'}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <p>哈信息人力资源管理系统</p>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:window.location.reload();" class="mdui-btn mdui-btn-icon"><i
+                class="mdui-icon material-icons">refresh</i></a>
+    </div>
+</header>
+
+<nav class="mdui-drawer mdui-card" id="left-drawer">
+    <div class="mdui-card-media">
+        <img th:src="@{/image/card.jpg}"/>
+        <div class="mdui-card-media-covered">
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title" sec:authentication="name">舒露</div>
+                <div class="mdui-card-primary-subtitle">欢迎</div>
+            </div>
+        </div>
+    </div>
+    <ul class="mdui-list mdui-card-content" mdui-collapse="{accordion: true}">
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item mdui-collapse-item-open">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+                <div class="mdui-list-item-content">职工信息管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffInfo/search}" class="mdui-list-item mdui-ripple">查询职工信息</a>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/index/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">attach_money</i>
+                <div class="mdui-list-item-content">职工工资管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffWage/search}" class="mdui-list-item mdui-ripple">查询工资信息</a>
+                <a th:href="@{/staffWage/add}" class="mdui-list-item mdui-ripple">添加工资信息</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postTitle">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature_people</i>
+            <a th:href="${'/manage/#/postTitle'}" class="mdui-list-item-content">岗位名称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postCategory">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature</i>
+            <a th:href="${'/manage/#/postCategory'}" class="mdui-list-item-content">岗位类别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobTitle">
+            <i class="mdui-list-item-icon mdui-icon material-icons">accessibility</i>
+            <a th:href="${'/manage/#/jobTitle'}" class="mdui-list-item-content">社会职称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobLevel">
+            <i class="mdui-list-item-icon mdui-icon material-icons">bubble_chart</i>
+            <a th:href="${'/manage/#/jobLevel'}" class="mdui-list-item-content">职称级别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="employmentForm">
+            <i class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
+            <a th:href="${'/manage/#/employmentForm'}" class="mdui-list-item-content">用工形式管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="department">
+            <i class="mdui-list-item-icon mdui-icon material-icons">transfer_within_a_station</i>
+            <a th:href="${'/manage/#/department'}" class="mdui-list-item-content">部门信息管理</a>
+        </li>
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">equalizer</i>
+                <div class="mdui-list-item-content">基层单位管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/grassroot/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <label class="mdui-switch">
+                <input type="checkbox" id="night_mode"/>
+                <i class="mdui-switch-icon"></i>
+            </label>
+            <div class="mdui-list-item-content">夜间模式</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+            <a href="" class="mdui-list-item-content">系统设置</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">vpn_key</i>
+            <a th:href="@{/logout}" class="mdui-list-item-content">注销登陆</a>
+        </li>
+    </ul>
+</nav>
+<section class="mdui-container mdui-p-t-2">
+    <div class="mdui-card">
+        <form id="search_form" th:action="@{/studentLeave/addLeave}" method="post" class="mdui-card-content">
+            <table style="width: 100%">
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-2"><p class="mdui-p-a-1">01.身份证号(必填):</p></td>
+                    <td class="mdui-col-xs-10"><input onblur="checkNid(this)" name="nid" type="text"
+                                                      oninput="checkRtNid(this)"
+                                                      class="mdui-textfield-input"
+                                                      required="required"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mdui-typo">
+                            <hr/>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="mdui-m-t-5">
+                    <td class="mdui-col-xs-3"><p class="mdui-p-a-1">02.工资日期(必填):</p></td>
+                    <td class="mdui-col-xs-9">
+                        <div id="comeDate_id" class="mdui-textfield">
+                            <input readonly="readonly"
+                                   class="mdui-textfield-input"
+                                   type="text" maxlength="11"
+                                   onfocus="WdatePicker({skin:'twoer',dateFmt:'yyyy年MM月',vel:'comeDate'})"
+                                   required="required"/><input
+                                id="comeDate" name="comeDate" type="text" class="mdui-hidden" required="required">
+                            <div class="mdui-textfield-error">请选择工资日期</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="mdui-typo">
+                            <hr/>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="mdui-m-t-12">
+                    <td class="mdui-col-xs-12"><input type="submit"
+                                                      class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+                                                      value="提交"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="mdui-dialog" id="add-dialog">
+        <div class="mdui-dialog-title">请选择添加方式</div>
+        <div class="mdui-dialog-content">支持通过Excle表格批量导入,您也可以使用Web页面添加职工工资信息</div>
+        <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel onclick="history.back();">取消添加
+            </button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel onclick="open_dialog('ID_dialog')">通过网页添加
+            </button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel onclick="open_dialog('add-excel-dialog')">
+                通过导入Excel表格添加
+            </button>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="add-excel-dialog">
+        <div class="mdui-dialog-title">上传Excel文件</div>
+        <div class="mdui-dialog-content">只能上传一个文件且文件扩展名为xls或xlsx</div>
+        <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel onclick="open_dialog('add-dialog')">返回</button>
+            <label class="mdui-btn mdui-ripple" for="xFile"><span id="file_name"></span>&nbsp;&nbsp;选择文件</label>
+            <form id="fileUP" th:action="@{/studentInfo/upExcelFile}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="xFile" style="position:absolute;clip:rect(0 0 0 0);"
+                       accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                <input type="button" class="mdui-btn mdui-ripple" onclick="up_excel_file()" value="开始上传">
+            </form>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="ID_dialog">
+        <div class="mdui-card">
+            <div class="mdui-card-content">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">请输入要添加工资的职工的身份证号码:</label>
+                    <input onblur="checkNid(this)" name="nid" type="text"
+                           oninput="checkRtNid(this)"
+                           class="mdui-textfield-input"
+                           required="required">
+                </div>
+            </div>
+            <div class="mdui-card-actions">
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">确认</button>
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" mdui-dialog-cancel
+                        onclick="open_dialog('add-dialog')">返回
+                </button>
+            </div>
+        </div>
+</section>
+<script th:src="@{/lib_web/jquery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/lib_web/mdui/js/mdui.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/lib_web/datepicker/WdatePicker.js}"></script>
+<script>
+    'use strict';
+    $(function () {
+        open_dialog('add-dialog');
+    });
+
+    function open_dialog(id) {
+        new mdui.Dialog('#' + id, {overlay: true, modal: true, history: false, closeOnEsc: false}).open();
+    }
+
+    //身份证号校验
+    function checkNid(that) {
+        if ($(that).val().length !== 18) {
+            that.focus();
+            mdui.snackbar({
+                message: "身份证号不是18位,当前" + $(that).val().length + "位.请检查!"
+            });
+        }
+    }
+
+    //实时检测用户输入
+    function checkRtNid(that) {
+        var str = $(that).val();
+        var last_str = str.charAt(str.length - 1);
+        if (str.length === 18 && (last_str === "X" || last_str === "x")) {
+            $(that).val(str.substring(0, 17) + "X");
+            return;
+        }
+        if (!$.isNumeric(last_str)) {
+            if (str.length > 1) {
+                $(that).val(str.substring(0, str.length - 1));
+            } else {
+                $(that).val("");
+            }
+
+        } else if (str.length > 18) {
+            $(that).val(str.substring(0, 18));
+        }
+    }
+</script>
+</body>
+</html>

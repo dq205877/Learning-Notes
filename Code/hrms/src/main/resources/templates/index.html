@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="人力资源管理系统"/>
+    <meta name="keywords" content="人力资源管理系统"/>
+    <meta name="author" content="ITNING.TOP"/>
+    <meta http-equiv="refresh" content="1;url=/manage/#/department" th:if="${departmentList.size()==0}">
+    <!--<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>-->
+
+    <title>职工信息管理-HRMS</title>
+
+    <!--mdui css-->
+    <link th:href="@{/lib_web/mdui/css/mdui.min.css}" rel="stylesheet">
+
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a href="javascript:" class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer'}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <p>哈信息人力资源管理系统</p>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="javascript:window.location.reload();" class="mdui-btn mdui-btn-icon"><i
+                class="mdui-icon material-icons">refresh</i></a>
+    </div>
+</header>
+
+<nav class="mdui-drawer mdui-card" id="left-drawer">
+    <div class="mdui-card-media">
+        <img th:src="@{/image/card.jpg}"/>
+        <div class="mdui-card-media-covered">
+            <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title" sec:authentication="name">舒露</div>
+                <div class="mdui-card-primary-subtitle">欢迎</div>
+            </div>
+        </div>
+    </div>
+    <ul class="mdui-list mdui-card-content" mdui-collapse="{accordion: true}">
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item mdui-collapse-item-open">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+                <div class="mdui-list-item-content">职工信息管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffInfo/search}" class="mdui-list-item mdui-ripple">查询职工信息</a>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/index/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">attach_money</i>
+                <div class="mdui-list-item-content">职工工资管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a th:href="@{/staffWage/search}" class="mdui-list-item mdui-ripple">查询工资信息</a>
+                <a th:href="@{/staffWage/add}" class="mdui-list-item mdui-ripple">添加工资信息</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postTitle">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature_people</i>
+            <a th:href="${'/manage/#/postTitle'}" class="mdui-list-item-content">岗位名称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="postCategory">
+            <i class="mdui-list-item-icon mdui-icon material-icons">nature</i>
+            <a th:href="${'/manage/#/postCategory'}" class="mdui-list-item-content">岗位类别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobTitle">
+            <i class="mdui-list-item-icon mdui-icon material-icons">accessibility</i>
+            <a th:href="${'/manage/#/jobTitle'}" class="mdui-list-item-content">社会职称管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="jobLevel">
+            <i class="mdui-list-item-icon mdui-icon material-icons">bubble_chart</i>
+            <a th:href="${'/manage/#/jobLevel'}" class="mdui-list-item-content">职称级别管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="employmentForm">
+            <i class="mdui-list-item-icon mdui-icon material-icons">dvr</i>
+            <a th:href="${'/manage/#/employmentForm'}" class="mdui-list-item-content">用工形式管理</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple" id="department">
+            <i class="mdui-list-item-icon mdui-icon material-icons">transfer_within_a_station</i>
+            <a th:href="${'/manage/#/department'}" class="mdui-list-item-content">部门信息管理</a>
+        </li>
+        <li th:if="${departmentList.size()!=0}" class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">equalizer</i>
+                <div class="mdui-list-item-content">基层单位管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <div th:each="department : ${departmentList} " class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:id="${department.id}" th:href="${'/grassroot/#/'+department.id}" th:text="${department.name}"
+                   class="mdui-list-item mdui-ripple">1602班</a>
+            </div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <label class="mdui-switch">
+                <input type="checkbox" id="night_mode"/>
+                <i class="mdui-switch-icon"></i>
+            </label>
+            <div class="mdui-list-item-content">夜间模式</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+            <a href="" class="mdui-list-item-content">系统设置</a>
+        </li>
+        <li class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">vpn_key</i>
+            <a th:href="@{/logout}" class="mdui-list-item-content">注销登陆</a>
+        </li>
+    </ul>
+</nav>
+<section class="mdui-container-fluid">
+    <div id="loading_progress" class="mdui-progress">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
+    <div class="mdui-table-fluid mdui-m-b-1">
+        <table id="show_table" class="mdui-table mdui-table-selectable mdui-table-hoverable">
+            <thead>
+            <tr>
+                <th style="min-width: 115px">姓名</th>
+                <th style="min-width: 210px">基层单位</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th style="min-width: 115px">民族</th>
+                <th style="min-width: 150px">政治面貌</th>
+                <th>出生日期</th>
+                <th>身份证号码</th>
+                <th>邮箱</th>
+            </tr>
+            </thead>
+            <tbody id="table_data">
+            </tbody>
+        </table>
+        <div class="mdui-card">
+            <div class="mdui-card-content">
+                <button id="down_select_btn" onclick="down_select()"
+                        class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" disabled>选中下载
+                </button>
+                <button id="del_select_btn" onclick="del_select(false)"
+                        class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" disabled>选中删除
+                </button>
+                <button id="add_stu_btn"
+                        class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+                        mdui-dialog="{target: '#add-dialog'}">添加职工
+                </button>
+                <button id="first_page_btn" mdui-tooltip="{content: '首页'}" onclick="changePage('first')"
+                        class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-theme-accent">
+                    <i class="mdui-icon material-icons">first_page</i>
+                </button>
+                <button id="previous_page_btn" mdui-tooltip="{content: '上一页'}" onclick="changePage('previous')"
+                        class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-theme-accent">
+                    <i class="mdui-icon material-icons">chevron_left</i>
+                </button>
+                <button id="next_page_btn" mdui-tooltip="{content: '下一页'}" onclick="changePage('next')"
+                        class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-theme-accent">
+                    <i class="mdui-icon material-icons">chevron_right</i>
+                </button>
+                <button id="last_page_btn" mdui-tooltip="{content: '尾页'}" onclick="changePage('last')"
+                        class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-theme-accent">
+                    <i class="mdui-icon material-icons">last_page</i>
+                </button>
+                <div class="mdui-chip">
+                    <span class="mdui-chip-title" id="page_info">当前第1页共4页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="add-dialog">
+        <div class="mdui-dialog-title">请选择添加方式</div>
+        <div class="mdui-dialog-content">支持通过Excle表格批量导入,您也可以使用Web页面添加职工信息</div>
+        <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>返回</button>
+            <button class="mdui-btn mdui-ripple" onclick="addStudent()">通过网页添加
+            </button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-cancel mdui-dialog="{target: '#add-excel-dialog'}">
+                通过导入Excel表格添加
+            </button>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="add-excel-dialog">
+        <div class="mdui-dialog-title">上传Excel文件</div>
+        <div class="mdui-dialog-content">只能上传一个文件且文件扩展名为xls或xlsx</div>
+        <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+            <label class="mdui-btn mdui-ripple" for="xFile"><span id="file_name"></span>&nbsp;&nbsp;选择文件</label>
+            <form id="fileUP" th:action="@{/staffInfo/upExcelFile}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="xFile" style="position:absolute;clip:rect(0 0 0 0);"
+                       accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                <input type="button" class="mdui-btn mdui-ripple" onclick="up_excel_file()" value="开始上传">
+            </form>
+        </div>
+    </div>
+    <div class="mdui-dialog" id="show_alert">
+        <div class="mdui-dialog-title">确定删除吗?</div>
+        <div class="mdui-dialog-content">这会删除该职工所有信息,包括所有工资信息!</div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" onclick="clear_btn()" mdui-dialog-close>取消</button>
+            <button class="mdui-btn mdui-ripple" onclick="del_select(true)" mdui-dialog-close>确认</button>
+        </div>
+    </div>
+</section>
+<script th:src="@{/lib_web/jquery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/lib_web/mdui/js/mdui.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:inline="javascript">
+    'use strict';
+    /*日期格式化方法*/
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+
+    /*判断字符串是否已指定字符串结束*/
+    String.prototype.endWith = function (endStr) {
+        var d = this.length - endStr.length;
+        return (d >= 0 && this.lastIndexOf(endStr) === d);
+    };
+
+    $(function () {
+        /*将文件名回显*/
+        $('#xFile').change(function () {
+            $('#file_name').html($(this).val().substr($(this).val().lastIndexOf('\\') + 1));
+        });
+        //默认获取第一个班级信息
+        var hash = (window.location.hash).slice(2);
+        if (!hash.endWith("mdui-dialog") && hash !== "") {
+            route(hash);
+        } else {
+            var firstClassID = [[${departmentList.size()!=0?departmentList[0].id:''}]];
+            if (firstClassID === "") {
+                progressStatus(false);
+            } else {
+                route(firstClassID);
+            }
+        }
+    });
+
+    //获取数据
+    var last_id = "";
+    var initData;
+    var pageSession = sessionStorage.getItem('nowPage');
+    var defPage = 1;
+    if (pageSession !== null) {
+        defPage = pageSession;
+    }
+    var $firstPageBtn = $('#first_page_btn');
+    var $previousPageBtn = $('#previous_page_btn');
+    var $nextPageBtn = $('#next_page_btn');
+    var $lastPageBtn = $('#last_page_btn');
+    var $pageInfo = $('#page_info');
+
+    function getData(id) {
+        if (last_id !== "") {
+            $('#' + last_id).removeClass("mdui-list-item-active");
+        }
+        $('#' + id).addClass("mdui-list-item-active");
+        var classList = [[${departmentList}]];
+        last_id = id;
+        $.getJSON("/staffInfo/show/" + id, function (data) {
+            $("#table_data").html("");
+            if (data.code === 404) {
+                console.error(data);
+                showSnackbar(data.msg);
+                progressStatus(false);
+            } else {
+                var $showTable = $('#show_table');
+                var $downSelectBtn = $('#down_select_btn');
+                var $delSelectBtn = $('#del_select_btn');
+                if (data.length !== 0) {
+                    $showTable.show();
+                    $downSelectBtn.show();
+                    $delSelectBtn.show();
+                    $firstPageBtn.show();
+                    $previousPageBtn.show();
+                    $nextPageBtn.show();
+                    $lastPageBtn.show();
+                    $pageInfo.show();
+                    initData = data;
+                    page(data, defPage);
+                } else {
+                    $firstPageBtn.hide("normal");
+                    $previousPageBtn.hide("normal");
+                    $nextPageBtn.hide("normal");
+                    $lastPageBtn.hide("normal");
+                    $pageInfo.hide("normal");
+                    $showTable.hide("normal");
+                    $downSelectBtn.hide("normal");
+                    $delSelectBtn.hide("normal");
+                }
+            }
+            mdui.updateTables();
+            progressStatus(false);
+            after();
+        });
+    }
+
+    var pageShow = 10;
+
+    function changePage(pages) {
+        //总页数 = (记录总数+一页显示的记录数-1) / 一页显示的记录数
+        var totalPage = Math.floor((initData.length + pageShow - 1) / pageShow);
+        switch (pages) {
+            case "first":
+                page(initData, 1);
+                defPage = 1;
+                break;
+            case "previous":
+                page(initData, --defPage);
+                break;
+            case "next":
+                page(initData, ++defPage);
+                break;
+            case "last":
+                page(initData, totalPage);
+                defPage = totalPage;
+                break;
+        }
+        sessionStorage.setItem('nowPage', defPage);
+    }
+
+    function page(data, nowPage) {
+        var totalPage = Math.floor((data.length + pageShow - 1) / pageShow);
+        if (totalPage === 1) {
+            $firstPageBtn.addClass("mdui-hidden");
+            $previousPageBtn.addClass("mdui-hidden");
+            $nextPageBtn.addClass("mdui-hidden");
+            $lastPageBtn.addClass("mdui-hidden");
+        } else {
+            $firstPageBtn.removeClass("mdui-hidden");
+            $previousPageBtn.removeClass("mdui-hidden");
+            $nextPageBtn.removeClass("mdui-hidden");
+            $lastPageBtn.removeClass("mdui-hidden");
+        }
+        if (nowPage >= totalPage) {
+            nowPage = totalPage;
+            $nextPageBtn.addClass("mdui-hidden");
+            $lastPageBtn.addClass("mdui-hidden");
+        }
+        if (nowPage <= 1) {
+            nowPage = 1;
+            $firstPageBtn.addClass("mdui-hidden");
+            $previousPageBtn.addClass("mdui-hidden");
+        }
+        var firstIndex = (nowPage - 1) * pageShow;
+        var lastIndex = firstIndex + pageShow - 1;
+        $pageInfo.html("当前第" + nowPage + "页共" + totalPage + "页");
+        var pageData = data.slice(firstIndex, lastIndex + 1);
+        $("#table_data").empty();
+        $.each(pageData, function (i, n) {
+            $("#table_data").append("<tr data-id=\"" + n.id + "\"><td><a href=\"/staffInfo/showDetails/" + n.id + "\" target=\"_blank\" class=\"\">" + n.name + "</a></td><td>" + n.grassroot.name + "</td><td>" + (n.sex ? "男" : "女") + "</td><td>" + n.age + "</td><td>" + n.ethnic.name + "</td><td>" + n.ps.name + "</td><td>" + ((new Date(n.birthday)).format("yyyy.MM.dd")) + "</td><td>" + n.nid + "</td><td>" + n.email + "</td></tr>")
+        });
+        mdui.updateTables();
+        after();
+    }
+
+    /*添加职工按钮*/
+    function addStudent() {
+        window.open('/staffInfo/add', '_self');
+    }
+
+    //进度条状态
+    function progressStatus(b) {
+        var $loadingProgress = $("#loading_progress");
+        if (b) {
+            $loadingProgress.removeClass("mdui-hidden");
+        } else {
+            $loadingProgress.addClass("mdui-hidden");
+        }
+    }
+
+    function after() {
+        /*根据复选框是否选中设置按钮是否可用*/
+        var $downSelectBtn = $('#down_select_btn');
+        var $delSelectBtn = $('#del_select_btn');
+        $("thead .mdui-checkbox input:checkbox").click(function () {
+            if ($(this).prop('checked')) {
+                $downSelectBtn.removeAttr('disabled');
+                $delSelectBtn.removeAttr('disabled');
+            } else {
+                $downSelectBtn.attr("disabled", "disabled");
+                $delSelectBtn.attr("disabled", "disabled");
+            }
+        });
+        $('tbody .mdui-checkbox input:checkbox').click(function () {
+            var hasChecked = false;
+            $('.mdui-checkbox input:checkbox').each(function () {
+                if ($(this).prop('checked')) {
+                    hasChecked = true;
+                }
+            });
+            if (hasChecked) {
+                $downSelectBtn.removeAttr('disabled');
+                $delSelectBtn.removeAttr('disabled');
+            } else {
+                $downSelectBtn.attr("disabled", "disabled");
+                $delSelectBtn.attr("disabled", "disabled");
+            }
+        });
+    }
+
+    /*监听锚点变化*/
+    $(window).bind('hashchange', function () {
+        var hash = (window.location.hash).slice(2);
+        if (!hash.endWith("mdui-dialog") && hash !== "") {
+            route(hash);
+        }
+    });
+
+    /*路由*/
+    function route(id) {
+        progressStatus(true);
+        getData(id);
+    }
+
+    /*清理按钮状态*/
+    function clear_btn() {
+        $('#down_select_btn').attr("disabled", "disabled");
+        $('#del_select_btn').attr("disabled", "disabled");
+    }
+
+    /*下载选中*/
+    function down_select() {
+        var downId = "";
+        $('.mdui-table-row-selected').each(function () {
+            downId += $(this).data('id') + "-";
+        });
+        window.open("/staffInfo/down?id=" + downId.substring(0, downId.length - 1), "_blank");
+    }
+
+    /*删除选中*/
+    function del_select(b) {
+        if (b) {
+            $('.mdui-table-row-selected').each(function () {
+                progressStatus(true);
+                var del_id = $(this).data('id');
+                console.log('删除-->' + del_id);
+                $.get("/staffInfo/del/" + del_id, function (data) {
+                    if (data.code === 200) {
+                        console.log('删除-->' + del_id + "成功");
+                        $('#down_select_btn').attr("disabled", "disabled");
+                        $('#del_select_btn').attr("disabled", "disabled");
+                        getData(last_id);
+                    } else {
+                        alert('删除-->' + del_id + "失败\nCODE:" + data.code + "\nMSG:" + data.msg + "\nURL:" + data.url);
+                        console.error('删除-->' + del_id + "失败\nCODE:" + data.code + "\nMSG:" + data.msg + "\nURL:" + data.url);
+                    }
+                });
+            });
+        } else {
+            new mdui.Dialog('#show_alert').open();
+        }
+
+    }
+
+    /*上传文件*/
+    function up_excel_file() {
+        var fileName = $('#xFile').val();
+        if (fileName.indexOf('xlsx') !== -1 || fileName.indexOf('xls') !== -1) {
+            new mdui.Dialog("#add-excel-dialog").close();
+            progressStatus(true);
+            $.ajax({
+                url: '/staffInfo/upExcelFile',
+                type: 'POST',
+                cache: false,
+                data: new FormData($('#fileUP')[0]),
+                processData: false,
+                contentType: false,
+                success: function (msg) {
+                    if (msg.code === 200) {
+                        progressStatus(false);
+                        window.location.reload();
+                    } else {
+                        progressStatus(false);
+                        mdui.alert(msg.msg + "<br>其余数据已正常添加<br>", '上传情况反馈', function () {
+                            window.location.reload();
+                        }, {history: false, modal: true, closeOnEsc: false});
+                    }
+                }
+            })
+        } else if (fileName === "") {
+            showSnackbar('未选择文件');
+        } else {
+            showSnackbar('文件类型不正确');
+        }
+    }
+
+    /*显示Snackbar*/
+    function showSnackbar(msg) {
+        mdui.snackbar({
+            message: msg
+        });
+    }
+</script>
+</body>
+</html>
