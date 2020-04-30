@@ -700,6 +700,32 @@ Redis将所有的数据都存放在内在中，所以它的读写性能十分惊
 
 Redis典型的应用场景包括：缓存、排行榜、计数器、社交网络、消息队列等。
 
+常见命令：
+
+key *     查看所有的
+
+exists key 判断是否存在
+
+move key db 当前库没了，被移除
+
+expire key seconds 设置过期时间
+
+ttl key  查看过期时间 －1永不过期 -2已过期
+
+type key 查看类型
+
+string
+
+set/get/del/append/strlen
+
+incr/decr/incrby decrby 加 减法
+
+getrange setrange   拼接替换
+
+setex( set with expire)键秒值/setnx(set if not exist) 
+
+mset/mget/msetnx 如果不存在插入（与）
+
 ### 											JSR－107
 
 #### Application

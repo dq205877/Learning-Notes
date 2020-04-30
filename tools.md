@@ -25,3 +25,41 @@ tools>Generator Javadoc
 Locale:zh_CN
 
 Other command line arguments:-encoding UTF-8 -charset UTF-8
+
+
+
+
+
+
+
+
+
+Redis
+
+1、downloads
+
+https://redis.io/download
+
+2、install
+
+tar -xzvf  redis...
+
+make(fail  yum install gcc-c++     &&      make MALLOC=libc)
+
+#make test  is don't necessary.
+
+make install
+
+3、backup conf  and edit conf
+
+daemonize yes
+
+4、use
+
+redis-server  /../redis.conf
+
+redis-cli -p  6379
+
+set  k  v 
+
+get  k
