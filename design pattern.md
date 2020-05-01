@@ -195,8 +195,17 @@ Head First 设计模式（中文版）：
 8、JAVA内置的代理支持，可以根据需要建立动态代理，并将所有调用分配到所选的处理器。
 
 9、就和其他的包装者（Wrapper)一样，代理会造成你的设计中类的数目增加。
+static proxy
+stable  1know real subject 2 has a pin to real subject
+dynamic proxy
+1must an interface
+2implements InvocationHandler && not implements subject && constructor Object
+3method. invoke(object,args) //object methods
+4test
 
 
+InvocationHandler handler = new dynamicProxy(subject) ;//初步代理对象
+Subject s = (Subject) Proxy.newProxyInstance(handler.getClass().getClassLoader(),handler.getClass().getInterface (),handler) ；//最终代理对象
 
 
 
