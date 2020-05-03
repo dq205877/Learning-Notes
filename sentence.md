@@ -117,3 +117,4 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 少壮不努力 老大徒伤悲
 黑发不知勤学早 白首方悔读书迟
 一日之计在于晨 一年之计在于春
+有志者 事竟成
