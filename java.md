@@ -419,6 +419,24 @@ int PROPAGATION_NESTED = 6;
 
 
 
+五大体系
+
+Resource体系
+
+InputStreamSource
+
+ResourceLoader
+
+BeanFactory体系
+
+BeanDefinition体系
+
+BeanDefinitionReader体系
+
+ApplicationContext体系
+
+
+
 ###### Spring AOP
 
 定义
