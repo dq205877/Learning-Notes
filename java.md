@@ -351,6 +351,25 @@ newSingleThreadExecutor
 
 
 
+JUC class
+
+LockSupport
+
+public static void park(Object blocker); // 暂停当前线程
+public static void parkNanos(Object blocker, long nanos); // 暂停当前线程，不过有超时时间的限制
+public static void parkUntil(Object blocker, long deadline); // 暂停当前线程，直到某个时间
+public static void park(); // 无期限暂停当前线程
+public static void parkNanos(long nanos); // 暂停当前线程，不过有超时时间的限制
+public static void parkUntil(long deadline); // 暂停当前线程，直到某个时间
+public static void unpark(Thread thread); // 恢复其他线程
+public static Object getBlocker(Thread t);
+
+park和unpark可以实现类似wait和notify的功能，但是并不和wait和notify交叉，也就是说unpark不会对wait起作用，notify也不会对park起作用。
+park和unpark的使用不会出现死锁的情况(但要合理运用，避免产生逻辑死锁)
+blocker的作用是在dump线程的时候看到阻塞对象的信息
+
+
+
 ```
 									Spring
 ```
