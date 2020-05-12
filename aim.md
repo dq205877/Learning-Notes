@@ -12,4 +12,6 @@
 
 4、英语。
 
+JVM 多线程 设计模式 redis  zookeeper mysql调优
+
 ​																	
