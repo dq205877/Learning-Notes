@@ -14,4 +14,12 @@
 
 JVM 多线程 设计模式 redis  zookeeper mysql调优
 
+
+
+
+
+操作系统   计算机组成原理  计算机网络   算法   数据结构
+
+JUC  /interface  & abstract class/  impl
+
 ​																	
