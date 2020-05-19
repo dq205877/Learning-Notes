@@ -21,3 +21,21 @@
 一个公用线程做为参数实例多个线程
 
 **留意i--与System.out.pringln()的异常**（两个原子操作合起来都不是原子操作，更何况i--不是）
+
+currentThread()方法 可返回代码段被哪个线程调用的信息
+
+isAlive()方法  判断当前线程是否处于活动状态
+
+sleep()方法  指定毫秒数让“当前正执行线程”休眠 **this.currentThread()**返回的线程
+
+getId()方法  作用是取得线程的唯一标识。（如两相同名的线程）
+
+**停止线程**
+
+①interrupt()并非真的停止线程，只是给当前线程作了停止的标记。
+
+②this.interrupted() 当前线程是否已中断 执行后具有将状态标志置清除为载false的功能。（第一次中断后，第二次中断j时调用检验完中断状态前不一定是false）
+
+this.isInterrupted() 线程是否已中断
+
+③异常  InterruptedException
