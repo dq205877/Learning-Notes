@@ -2,7 +2,7 @@
 定数 身外之物皆为云烟 无我
 以合法的方式去保护自己的权益不受损害！
 时间是一切财富中最宝贵的财富。—— [德奥弗拉斯多]
-Where there is a Will, there is a way. 
+Where there is a will, there is a way. 
 
 Opportunity is missed by most people because it is dressed in overalls and looks like work.
 
@@ -393,6 +393,7 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 　　8. 决不能在没有选择的情况下，作出重大决策。——李·艾柯卡
 
 　　9. 企业管理过去是沟通，现在是沟通，未来还是沟通。——松下幸之助
+需求
 
 
 
