@@ -38,4 +38,16 @@ getId()方法  作用是取得线程的唯一标识。（如两相同名的线�
 
 this.isInterrupted() 线程是否已中断
 
-③异常  InterruptedException
+③异常  InterruptedException  中断后下面有代码会继续执行
+
+④先sleep再停止，sleep前后代码都执行再进入异常捕获 清除停止状态值 为false
+
+先停止再sleep,sleep后代码不执行进入异常捕获
+
+⑤stop()暴力停止
+
+⑥stop()与java.lang.ThreadDeath异常  stop()无须显式捕获该异常   stop()可能使一些清理性的工作得不到完成  还会解锁锁定对象，导致不同步
+
+⑦stop()释放锁造成数据不一致
+
+⑧推荐用抛异常方式停止，能向上传播。 interrupt()与return结束也能实现 线程停止。

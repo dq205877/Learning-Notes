@@ -353,3 +353,20 @@ int[] arr = {1,-3,2,4,-1,2,-3,2};
         System.out.println(biggest);
 ```
 
+
+
+多线程
+
+2020-05-27
+
+001
+
+**简述 synchronized 和 java.util.concurrent.locks.Lock**
+
+**的异同？**
+
+答：
+
+Lock 是 Java 5 以后引入的新的 API，和关键字 synchronized 相比主要相同点：
+
+Lock 能完成 synchronized 所实现的所有功能；主要不同点：Lock 有比synchronized 更精确的线程语义和更好的性能，而且不强制性的要求一定要获得锁。synchronized 会自动释放锁，而 Lock 一定要求程序员手工释放，并且最好在 finally 块中释放（这是释放外部资源的最好的地方）。
