@@ -514,6 +514,24 @@ org.aopalliance.aop.Advice
 
 引介 IntroductionInterceptor  添加新行为和属性
 
+
+
+
+
+
+
+CGLIB/JDK动态代理
+
+
+
+
+
+
+
+
+
+
+
 ### AspectJ
 
 #### 介绍
