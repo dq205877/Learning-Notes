@@ -438,3 +438,258 @@ js就采用了单线程异步 I/O 的工作模式。
 常；
 
 ④ sleep()方法比 yield()方法（跟操作系统 CPU 调度相关）具有更好的可移植性。
+
+2020-05-30
+
+004
+
+Java中的volatile 变量是什么？
+volatile是一个特殊的修饰符，只有成员变量才能使用它。在Java并发程序缺少同步类的情况下，多线程对成员变量的操作对其它线程是透明的。volatile变量可以保证下一个读取操作会在前一个写操作之后发生，就是上一题的volatile变量规则。
+
+2020-05-31
+
+005
+
+Java中什么是竞态条件？ 举个例子说明。
+竞态条件会导致程序在并发情况下出现一些bugs。多线程对一些资源的竞争的时候就会产生竞态条件，如果首先要执行的程序竞争失败排到后面执行了， 那么整个程序就会出现一些不确定的bugs。这种bugs很难发现而且会重复出现，因为线程间的随机竞争。
+
+2020-06-01
+
+006
+
+## 什么是不可变对象，它对写并发应用有什么帮助？
+
+另一个多线程经典面试问题，并不直接跟线程有关，但间接帮助很多。这个java面试问题可以变的非常棘手，如果他要求你写一个不可变对象，或者问你为什么String是不可变的。
+
+immutable Objects(不可变对象)就是那些一旦被创建，它们的状态就不能被改变的Objects，每次对他们的改变都是产生了新的immutable的对象，而mutable Objects(可变对象)就是那些创建后，状态可以被改变的Objects.
+
+如何在Java中写出Immutable的类？ 
+
+1. immutable对象的状态在创建之后就不能发生改变，任何对它的改变都应该产生一个新的对象。 
+
+2. immutable类的所有的属性都应该是final的。 
+
+3. 对象必须被正确的创建，比如：对象引用在对象创建过程中不能泄露(leak)。 
+
+4. 对象应该是final的，以此来限制子类继承父类，以避免子类改变了父类的immutable特性。 
+
+5. 如果类中包含mutable类对象，那么返回给客户端的时候，返回该对象的一个拷贝，而不是该对象本身（该条可以归为第一条中的一个特例）
+
+使用Immutable类的好处： 
+
+1. Immutable对象是线程安全的，可以不用被synchronize就在并发环境中共享 
+2. Immutable对象简化了程序开发，因为它无需使用额外的锁机制就可以在线程间共享
+3. Immutable对象提高了程序的性能，因为它减少了synchroinzed的使用 
+4. Immutable对象是可以被重复使用的，你可以将它们缓存起来重复使用，就像字符串字面量和整型数字一样。你可以使用静态工厂方法来提供类似于valueOf（）这样的方法，它可以从缓存中返回一个已经存在的Immutable对象，而不是重新创建一个。
+
+2020-06-01心科面试
+
+1、&与&&
+
+参考答案：&运算符有两种用法：(1)按位与；(2)逻辑与。&&运算符是短路与运算。逻辑与跟短路与的差别是非常巨大的，虽然二者都要求运算符左右两端的布尔值都是true整个表达式的值才是true。&&之所以称为短路运算是因为，如果&&左边的表达式的值是false，右边的表达式会被直接短路掉，不会进行运算。很多时候我们可能都需要用&&而不是&，例如在验证用户登录时判定用户名不是null而且不是空字符串，应当写为：username != null &&!username.equals(“”)，二者的顺序不能交换，更不能用&运算符，因为第一个条件如果不成立，根本不能进行字符串的equals比较，否则会产生NullPointerException异常。注意：逻辑或运算符（|）和短路或运算符（||）的差别也是如此。
+
+3、finally里有return
+
+参考答案：
+
+执行顺序：
+
+​    1、执行：expression，计算该表达式，结果保存在操作数栈顶；
+​    2、执行：操作数栈顶值（expression的结果）复制到局部变量区作为返回值；
+​    3、执行：finally语句块中的代码；
+​    4、执行：将第2步复制到局部变量区的返回值又复制回操作数栈顶；
+​    5、执行：return指令，返回操作数栈顶的值；
+
+4、Innodb和Myisam
+
+参考答案：
+
+1、MyISAM是非事务安全的，而InnoDB是事务安全的
+
+2、MyISAM锁的粒度是表级的，而InnoDB支持行级锁
+
+3、MyISAM支持全文类型索引，而InnoDB不支持全文索引
+
+4、MyISAM相对简单，效率上要优于InnoDB，小型应用可以考虑使用MyISAM
+
+5、MyISAM表保存成文件形式，跨平台使用更加方便
+
+5、final、finally、finalize
+
+参考答案：
+
+简单区别：
+
+- final用于声明属性，方法和类，分别表示属性不可交变，方法不可覆盖，类不可继承。
+- finally是异常处理语句结构的一部分，表示总是执行。
+- finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，供垃圾收集时的其他资源回收，例如关闭文件等。
+
+中等区别：
+
+final：java中的关键字，修饰符。
+A).如果一个类被声明为final，就意味着它不能再派生出新的子类，不能作为父类被继承。因此，一个类不能同时被声明为abstract抽象类的和final的类。
+B).如果将变量或者方法声明为final，可以保证它们在使用中不被改变.
+　　1)被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。
+　　2)被声明final的方法只能使用，不能重载。
+finally：java的一种异常处理机制。
+
+finally是对Java异常处理模型的最佳补充。finally结构使代码总会执行，而不管无异常发生。使用finally可以维护对象的内部状态，并可以清理非内存资源。特别是在关闭数据库连接这方面，如果程序员把数据库连接的close()方法放到finally中，就会大大降低程序出错的几率。
+
+finalize：Java中的一个方法名。
+Java技术使用finalize()方法在垃圾收集器将对象从内存中清除出去前，做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没被引用时对这个对象调用的。它是在Object类中定义的，因此所的类都继承了它。子类覆盖finalize()方法以整理系统资源或者执行其他清理工作。finalize()方法是在垃圾收集器删除对象之前对这个对象调用的。
+
+
+
+6、LinkedList、ArrayList、Vector
+
+1.从存储数据结构分析
+
+ArrayList：数组
+
+Vector：数组
+
+LinkedList：双向链表
+
+数组：可以根据下标快速查找，所以大部分情况下，查询快。但是如果要进行增删操作的时候，会需要移动修改元素后面的所有元素，所以增删的开销比较大，数组的对增删操作的执行效率低。而采用数组作为数据存储结构的ArrayList、Vector也存在这些特性，查询速度快（可以根据下标直接取，比迭代查找更快），增删慢。
+
+链表：增加和删除元素方便，增加或删除一个元素，仅需处理结点间的引用即可。就像人手拉手连成一排，要增加或删除某个人只要附近的两个人换一个人牵手，对已经牵好手的人没影响。无论在哪里换人耗费的资源和时间都是一样的。但是查询不方便，需要一个个对比，无法根据下标直接查找。而采用链表结构存储的LinkedList也有这些特性，增删方便，查询慢(指的是随机查询，不是顺序查询)。
+
+2.从继承上分析
+
+ 都实现了List接口，也就是说都实现了get(int location)、remove(int location)等“根据索引值来获取、删除节点的函数”。数组结构根据下标取值很容易，LinkedList双向列表的实现也比较简单，通过计数索引值实现，从链表长度的1/2开始查找，下标大了就从表头开始找，小了就从表尾开始找。
+
+3.从并发安全上分析
+
+Vector：线程安全
+
+ArrayList：非线程安全
+
+LinkedList:非线程安全
+
+4.数据增长分析
+
+Vector：缺省的情况下，增长为原数组长度的一倍。说到缺省，说明他其实是可以自主设置初始化大小的。
+
+ArrayList：自动增长原数组的50%。
+原文链接：https://blog.csdn.net/sinat_36265222/java/article/details/86481715
+
+7、跳出多重循环
+
+1、标识变量
+
+2、try...catch
+
+3、break标签变量
+
+https://jingyan.baidu.com/article/86112f13be25ea2737978796.html
+
+8、线程执行过程。
+
+线程的五大状态分别为：创建状态（New）、就绪状态（Runnable）、运行状态（Running）、阻塞状态（Blocked）、死亡状态（Dead）。
+
+https://blog.csdn.net/tongxuexie/article/details/80145663
+
+9、去List重
+
+1、使用LinkedHashSet删除ArrayList中的重复数据（有序）
+
+2、使用HashSet去重（无序）
+
+3、使用java8新特性stream进行List去重
+
+List<String> words= Arrays.asList("a","b","b","c","c","d"); words.stream().distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+4、使用List的contains()去重
+
+https://www.cnblogs.com/lxy0/p/12483028.html
+
+10、split
+
+1、
+
+2、
+
+3、
+
+1、将逗号分隔的字符串转换为List
+
+```
+String str = ``"a,b,c"``; 
+` `List result = Arrays.asList(str.split(``","``));
+```
+
+　　
+
+2、将List转换为逗号分隔的字符串
+
+（1） 利用Guava的Joiner
+
+```
+List list = ``new` `ArrayList();
+``list.add(``"a"``);
+``list.add(``"b"``); 
+``list.add(``"c"``); 
+` `String str = Joiner.on(``","``).join(list); 
+```
+
+　　
+
+（2）利用Apache Commons的StringUtils
+
+```
+List list = ``new` `ArrayList(); 
+``list.add(``"a"``);
+``list.add(``"b"``);
+``list.add(``"c"``); 
+` `String str = StringUtils.join(list.toArray(), ``","``); 
+```
+
+https://www.cnblogs.com/itzyz/p/10844004.html
+
+①Spring Cloud组件②JWT/Auth 2 ③Cookie、Session④Filter、Inceptor⑤Spring Boot常用启动器 ⑥Spring Data JPA
+
+一、Spring Cloud组件
+
+Eureka：各个服务启动时，Eureka Client都会将服务注册到Eureka Server，并且Eureka Client还可以反过来从Eureka Server拉取注册表，从而知道其他服务在哪里
+Ribbon：服务间发起请求的时候，基于Ribbon做负载均衡，从一个服务的多台机器中选择一台
+Feign：基于Feign的动态代理机制，根据注解和选择的机器，拼接请求URL地址，发起请求
+Hystrix：发起请求是通过Hystrix的线程池来走的，不同的服务走不同的线程池，实现了不同服务调用的隔离，避免了服务雪崩的问题
+Zuul：如果前端、移动端要调用后端系统，统一从Zuul网关进入，由Zuul网关转发请求给对应的服务
+
+https://blog.csdn.net/xunjiushi9717/article/details/91988479
+
+二、JWT/Auth 2
+
+三、Cookie、Session
+链接：https://www.zhihu.com/question/19786827/answer/28752144
+
+1. 由于HTTP协议是无状态的协议，所以服务端需要记录用户的状态时，就需要用某种机制来识具体的用户，这个机制就是Session.典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。集群的时候也要考虑Session的转移，在大型的网站，一般会有专门的Session服务器集群，用来保存用户会话，这个时候 Session 信息都是放在内存的，使用一些缓存服务比如Memcached之类的来放 Session。
+2. 思考一下服务端如何识别特定的客户？这个时候Cookie就登场了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。有人问，如果客户端的浏览器禁用了 Cookie 怎么办？一般这种情况下，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如 sid=xxxxx 这样的参数，服务端据此来识别用户。
+   \3. Cookie其实还可以用在一些方便用户的场景下，设想你某次登陆过一个网站，下次登录的时候不想再次输入账号了，怎么办？这个信息可以写到Cookie里面，访问网站的时候，网站页面的脚本可以读取这个信息，就自动帮你把用户名给填了，能够方便一下用户。这也是Cookie名称的由来，给用户的一点甜头。
+   所以，总结一下：
+   Session是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中；
+   Cookie是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。
+
+https://www.zhihu.com/question/19786827
+
+四、Filter、Inceptor
+
+### Filter和Interceptor的区别
+
+- Filter是基于函数回调的，而Interceptor则是基于Java反射的。
+- Filter依赖于Servlet容器，而Interceptor不依赖于Servlet容器。
+- Filter对几乎所有的请求起作用，而Interceptor只能对action请求起作用。
+- Interceptor可以访问Action的上下文，值栈里的对象，而Filter不能。
+- 在action的生命周期里，Interceptor可以被多次调用，而Filter只能在容器初始化时调用一次。
+
+https://blog.csdn.net/testcs_dn/article/details/80279578
+
+五、Spring Boot常用启动器
+
+https://blog.csdn.net/qq_41566980/article/details/84869235
+
+六、Spring Data JPA
+
+https://www.jianshu.com/p/c23c82a8fcfc
+
+**20200601面试总结**：其实每个问题都答出一部分来了，不够细致，不够扎实。可能给offer可能性 80%
