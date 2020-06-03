@@ -498,6 +498,18 @@ immutable Objects(不可变对象)就是那些一旦被创建，它们的状态�
 
 程局部变量一旦在工作完成后没有释放，Java 应用就存在内存泄露的风险。
 
+2020-06-03
+
+008
+
+**Cookie与Session**
+
+1，session 在服务器端，cookie 在客户端（浏览器）
+2，session 默认被存在在服务器的一个文件里（不是内存）
+3，session 的运行依赖 session id，而 session id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 session_id）
+4，session 可以放在 文件、数据库、或内存中都可以。
+5，用户验证这种场合一般会用 session
+
 2020-06-01心科面试
 
 1、&与&&
@@ -713,3 +725,9 @@ https://blog.csdn.net/qq_41566980/article/details/84869235
 https://www.jianshu.com/p/c23c82a8fcfc
 
 **20200601面试总结**：其实每个问题都答出一部分来了，不够细致，不够扎实。可能给offer可能性 80%
+
+
+
+2020-06-03
+
+在上海面试，给我感觉安全很重要，JWT/Auth 2/Serculty/加解密等等
