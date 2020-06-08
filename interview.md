@@ -524,6 +524,58 @@ ArrayList和LinkedList都实现了List接口，有以下的不同点：
 
 
 
+2020-06-05
+
+010
+
+**讲讲你理解的 nio和 bio 的区别是啥，谈谈 reactor 模型。**
+IO(BIO)是面向流的，NIO是面向缓冲区的
+BIO：Block IO 同步阻塞式 IO，就是我们平常使用的传统 IO，它的特点是模式简单使用方便，并发处理能力低。
+NIO：New IO 同步非阻塞 IO，是传统 IO 的升级，客户端和服务器端通过 Channel（通道）通讯，实现了多路复用。
+AIO：Asynchronous IO 是 NIO 的升级，也叫 NIO2，实现了异步非堵塞 IO ，异步 IO 的操作基于事件和回调机制。
+
+2020-06-06
+
+011
+
+**countdowlatch 和 cyclicbarrier 的内部原理和用法，以及相互之间的差别。**
+CountDownLatch是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它运行一个或者多个线程一直处于等待状态。
+CyclicBarrier要做的事情是，让一组线程到达一个屏障（也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续运行。
+CyclicBarrier初始化的时候，设置一个屏障数。线程调用await()方法的时候，这个线程就会被阻塞，当调用await()的线程数量到达屏障数的时候，主线程就会取消所有被阻塞线程的状态。
+前者是递减，不可循环，后者是递加，可循环用
+countdowlatch 基于abq cb基于ReentrantLock Condition
+
+
+
+2020-06-07
+
+012
+
+Java List的remove()
+
+1、用for循环遍历List删除元素时，需要注意索引会左移的问题。
+
+2、List删除元素时，为避免陷阱，建议使用迭代器iterator的remove方式。
+3、List删除元素时，默认按索引删除，而不是对象删除。
+
+
+
+2020-06-08
+
+013
+
+讲讲 Spring 事务的传播属性。
+七种传播属性。
+事务传播行为
+所谓事务的传播行为是指，如果在开始当前事务之前，一个事务上下文已经存在，此时有若干选项可以指定一个事务性方法的执行行为。在TransactionDefinition定义中包括了如下几个表示传播行为的常量：
+①TransactionDefinition.PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。
+②TransactionDefinition.PROPAGATION_REQUIRES_NEW：创建一个新的事务，如果当前存在事务，则把当前事务挂起。
+③TransactionDefinition.PROPAGATION_SUPPORTS：如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。
+④TransactionDefinition.PROPAGATION_NOT_SUPPORTED：以非事务方式运行，如果当前存在事务，则把当前事务挂起。
+⑤TransactionDefinition.PROPAGATION_NEVER：以非事务方式运行，如果当前存在事务，则抛出异常。
+⑥TransactionDefinition.PROPAGATION_MANDATORY：如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。
+⑦TransactionDefinition.PROPAGATION_NESTED：如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；如果当前没有事务，则该取值等价于TransactionDefinition.PROPAGATION_REQUIRED。
+
 
 
 
