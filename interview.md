@@ -578,6 +578,33 @@ Java List的remove()
 
 
 
+2020-06-09
+
+014
+
+**Files的常用方法都有哪些？**
+Files.exists()：检测文件路径是否存在。
+Files.createFile()：创建文件。
+Files.createDirectory()：创建文件夹。
+Files.delete()：删除一个文件或目录。
+Files.copy()：复制文件。
+Files.move()：移动文件。
+Files.size()：查看文件个数。
+Files.read()：读取文件。
+Files.write()：写入文件。
+
+
+
+2020-06-10
+
+015
+
+**@Component, @Controller, @Repository, @Service 有何区别？**
+@Component：这将 java 类标记为 bean。它是任何 Spring 管理组件的通用构造型。spring 的组件扫描机制现在可以将其拾取并将其拉入应用程序环境中。
+@Controller：这将一个类标记为 Spring Web MVC 控制器。标有它的 Bean 会自动导入到 IoC 容器中。
+@Service：此注解是组件注解的特化。它不会对 @Component 注解提供任何其他行为。您可以在服务层类中使用 @Service 而不是 @Component，因为它以更好的方式指定了意图。
+@Repository：这个注解是具有类似用途和功能的 @Component 注解的特化。它为 DAO 提供了额外的好处。它将 DAO 导入 IoC 容器，并使未经检查的异常有资格转换为 Spring DataAccessException。
+
 
 
 2020-06-01心科面试
@@ -801,3 +828,77 @@ https://www.jianshu.com/p/c23c82a8fcfc
 2020-06-03
 
 在上海面试，给我感觉安全很重要，JWT/Auth 2/Serculty/加解密等等
+
+
+
+java栈实现
+
+①菜鸟教程
+
+```
+public class MyStack {
+   private int maxSize;
+   private long[] stackArray;
+   private int top;
+   public MyStack(int s) {
+      maxSize = s;
+      stackArray = new long[maxSize];
+      top = -1;
+   }
+   public void push(long j) {
+      stackArray[++top] = j;
+   }
+   public long pop() {
+      return stackArray[top--];
+   }
+   public long peek() {
+      return stackArray[top];
+   }
+   public boolean isEmpty() {
+      return (top == -1);
+   }
+   public boolean isFull() {
+      return (top == maxSize - 1);
+   }
+   public static void main(String[] args) {
+      MyStack theStack = new MyStack(10); 
+      theStack.push(10);
+      theStack.push(20);
+      theStack.push(30);
+      theStack.push(40);
+      theStack.push(50);
+      while (!theStack.isEmpty()) {
+         long value = theStack.pop();
+         System.out.print(value);
+         System.out.print(" ");
+      }
+      System.out.println("");
+   }
+}
+```
+
+
+
+1、对于一个包含n>1个元素的整数数列，如果序列中相邻元素之差的绝对值取遍从1到n-1的所有整数，那么这个序列就叫做jolly jumper。例如：1 4 2 3就是一个jolly jumper，因为相邻元素的绝对值分别为3，2，1。写一个JAVA（或C、C++）程序来判断序列是不是jolly jumper。输入一个整数n<=3000,然后是n个整数，表示一个输入序列,针对输入，输出一行“Jolly”或者“Not jolly”来表示它是否为jolly jumper。
+
+2、实现一个堆栈，满足后进先出 
+
+3、简答进程与线程的区别，以及使用多线程的优点和缺点
+
+4、简答HashMap和HashTable的区别 
+
+5、Java中构造方法是否可以为synchronized，为什么?
+
+6、简答Java线程有哪些状态，及线程状态转换关系 
+
+7、简要说明HashMap的原理
+
+8、Minor GC，Major GC，Full GC各在什么情况下发生？当一个Java应用发生OutOfMemory时该如何解决？
+
+9、简述乐观锁和悲观锁，并各举一个场景说明。
+
+10、简述四种编码方式，并简述web页面乱码时的解决思路。
+
+11、Java集合框架的基础接口有Set, List, Map,简要说明各有哪些实现类，并说明其区别
+
+12、同步方法与同步代码块的区别
