@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fce413da-8583-42b0-a933-24d366e8671b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../interview.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../interview.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../java.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../java.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +45,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/subArrBigSum_1_1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="616">
               <caret line="46" column="5" selection-start-line="5" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -91,7 +93,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="435" />
-    <option name="y" value="266" />
+    <option name="y" value="265" />
     <option name="width" value="1400" />
     <option name="height" value="780" />
   </component>
@@ -102,7 +104,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -119,6 +120,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -202,17 +204,19 @@
       <updated>1587998584392</updated>
       <workItem from="1587998586270" duration="6551000" />
       <workItem from="1588163762321" duration="599000" />
+      <workItem from="1593409635848" duration="24000" />
+      <workItem from="1593443052833" duration="50000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7150000" />
+    <option name="totallyTimeSpent" value="7224000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2533512" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2600536" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -272,7 +276,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/subArrBigSum_1_1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="616">
           <caret line="46" column="5" selection-start-line="5" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />

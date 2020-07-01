@@ -607,6 +607,34 @@ Files.write()：写入文件。
 
 
 
+2020-06-11
+
+016
+
+## BeanFactory 和 ApplicationContext 有什么区别
+
+> BeanFactory 可以理解为含有bean集合的工厂类。BeanFactory 包含了种bean的定义，以便在接收到客户端请求时将对应的bean实例化。
+>  BeanFactory还能在实例化对象的时生成协作类之间的关系。此举将bean自身与bean客户端的配置中解放出来。BeanFactory还包含了bean生命周期的控制，调用客户端的初始化方法（initializationmethods）和销毁方法（destruction methods）。
+>  从表面上看，applicationcontext如同beanfactory一样具有bean定义、bean关联关系的设置，根据请求分发bean的功能。但applicationcontext在此基础上还提供了其他的功能。
+>  提供了支持国际化的文本消息统一的资源文件读取方式已在监听器中注册的bean的事件
+
+
+
+2020-06-12
+
+017
+
+**Spring 框架中用到了哪些设计模式**
+**代理模式**—在AOP和remoting中被用的比较多。
+**单例模式**—在spring配置文件中定义的bean默认为单例模式。
+**模板方法**—用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。
+**前端控制器**—Spring提供了DispatcherServlet来对请求进行分发。
+**视图帮助(View Helper)**—Spring提供了一系列的JSP标签，高效宏来辅助将分散的代码整合在视图里。
+**依赖注入**—贯穿于BeanFactory / ApplicationContext接口的核心理念。
+**工厂模式**—BeanFactory用来创建对象的实例。
+
+
+
 2020-06-01心科面试
 
 1、&与&&
