@@ -84,12 +84,22 @@ B-Tree:
 B+Tree:
 
 - 非叶子节点不存储data，只存储索引（冗余），可以放更多的索引
-
 - 叶子节点包含所有索引字段
-
 - 叶子节点用指针连接，提高区间访问的性能
 
 
+
+CPU缓存：缓存一致性
+
+MESI（Modified/Exclusive/Shared/Invalid)修改/独享/共享/无效
+
+
+
+JMM Unlock/Lock 主内存  Read Load 工作内存  Use  线程内存 Assign  工作内存 Store Write 主内存
+
+synchornized JMM规定 解锁前 共享变量最新值刷到主内存  加锁时，清空工作内存中共享变量值，即让共享变量在主内存重新读取最新的值。
+
+volatile 内存屏障和禁止重排序  写 store屏障指令  读 load屏障指令
 
 
 ![JVM memory](D:\Git-Center\Learning-Notes\source\static\images\JAVA-memory.png)
