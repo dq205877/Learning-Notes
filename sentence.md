@@ -396,4 +396,10 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 需求
 
 
+为天地立心
+为生民立命
+为往圣继绝学
+为万世开太平     -北宋.张载
+
+
 
