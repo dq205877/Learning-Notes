@@ -402,4 +402,6 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 为万世开太平     -北宋.张载
 
 
+嘴中言少，自然祸少，腹中食少，自然疾少，心中欲少，自然忧少，身上事少，自然苦少。大悲无泪，大悟无言，缘来要惜，缘尽要放！
+
 
