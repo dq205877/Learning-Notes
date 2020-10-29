@@ -144,15 +144,59 @@ SOA（Service-Oriented Architecture）：1、信息孤岛（信息互通） 2、
 
 4、Spring Cloud Netflix
 
+​	  Eureka,服务注册与发现。
+
+​	   Zuul,服务网关。
+
+​	   Ribbon, 负载均衡。
+
+​       Feign, 远程服务的端代理。
+
+​		Hystrix,断路器，提供服务熔断和限流功能。
+
+​		Hystrix Dashboard,监控面板。
+
+​		Trubine, 将各个服务实例上的Hystrix监控信息进行统一聚合。有组件停更
+
 5、Spring Cloud Alibaba
+
+​		Sentinel 流量控制和服务降级
+
+​		Nacos 服务注册与发现
+
+​		Nacos 分布式配置中心
+
+​		RocketMQ  消息驱动
+
+​		Seate  分布式事务
+
+​		Dubbo RPC通信
+
+​		OSS 阿里云对象存储（收费的云服务）。
 
 5.1 Advantages of Spring Cloud Alibaba
 
+​	1、未织入Cloud生态前已经广泛使用，Dubbo支持多协议
+
+​    2、经过了双11考验0.0
+
 5.2 Spring Cloud Alibaba Version
+
+​		
 
 
 
 第三章 Spring Cloud的核心之Spring Boot
+
+​	1、重识Spring Boot
+
+​	2、构建Spring Boot应用
+
+​	3、Spring Boot自动装配的原理
+
+​	4、手写实现一个Starter
+
+​	5、小结
 
 第四章 微服务架构下的服务治理
 
