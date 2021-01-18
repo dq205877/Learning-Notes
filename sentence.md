@@ -417,3 +417,5 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 民怨其上，兽怨其亡。-人反上，兽反关。南老_庄子
 
 五种般若：实相般若/境界般若/文字般若/方便般若/眷属般若 内涵：金刚般若。 般若：了解道、悟道修证、了脱生死、超凡入圣的智慧
+
+黄帝内经：上药：精气神
