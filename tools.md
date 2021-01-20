@@ -63,3 +63,14 @@ redis-cli -p  6379
 set  k  v 
 
 get  k
+
+
+
+
+
+PLSQL
+
+no blank in tnsnames.ora for names
+
+
+

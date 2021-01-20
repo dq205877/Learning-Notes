@@ -117,6 +117,7 @@ wait和while一起使用，两次检查
 https://blog.csdn.net/puppylpg/article/details/80433271
 
 23、c_023
+内部类返回一个外部实例，不加锁方式实现懒加载单例
 
 24、c_024
 

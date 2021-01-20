@@ -228,3 +228,86 @@ rm -rf dir1 删除一个叫做 'dir1' 的目录并同时删除其内容
 rm -rf dir1 dir2 同时删除两个目录及它们的内容 
 mv dir1 new_dir 重命名/移动 一个目录 
 cp file1 file2 复制一个文件 
+
+
+
+
+
+**2>/dev/null**
+意思就是把错误输出到“黑洞”
+
+**>/dev/null 2>&1**
+默认情况是1，也就是等同于1>/dev/null 2>&1。意思就是把标准输出重定向到“黑洞”，还把错误输出2重定向到标准输出1，也就是标准输出和错误输出都进了“黑洞”
+
+**2>&1 >/dev/null**
+意思就是把错误输出2重定向到标准出书1，也就是屏幕，标准输出进了“黑洞”，也就是标准输出进了黑洞，错误输出打印到屏幕
+
+#### 二、解释：
+
+**1、文件描述符**
+Linux系统预留可三个文件描述符：0、1和2，他们的意义如下所示：
+0——标准输入（stdin）
+1——标准输出（stdout）
+2——标准错误（stderr）
+
+
+
+
+
+
+
+**sftp命令**
+
+
+
+1. sftp user@ip
+
+​      你要用sftp, 当然得登录到sftp服务器啊， 在linux的shell中执行上面的命令后， linux shell会提示用户输入密码， 我们就输入password吧。 这样就成功建立了sftp连接。
+
+​    2. help
+
+​      建立连接后， linux shell中的$编程了sftp>,  这也对。 现在执行以下help, 可以看看sftp支持哪些命令。
+
+​    3. pwd和lpwd
+
+​      pwd是看远端服务器的目录， 即sftp服务器默认的当前目录。  lpwd是看linux本地目录。
+
+​    4. ls和lls
+
+​      ls是看sftp服务器下当前目录下的东东， lls是看linux当前目录下的东东。
+
+​    5. put a.txt
+
+​      这个是把linux当前目录下的a.txt文件上传到sftp服务器的当前目录下。
+
+![img](https://img-blog.csdn.net/20180428102343346?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0MzA5Nzg3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+​    6. get b.txt
+
+ 这个是把sftp服务器当前目录下的b.txt文件下载到linux当前目录下。 ![img](https://img-blog.csdn.net/20180428102413545?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0MzA5Nzg3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+​     7. !command
+
+​      这个是指在linux上执行command这个命令， 比如!ls是列举linux当前目录下的东东， !rm a.txt是删除linux当前目录下的a.txt文件。
+
+​      这个命令非常非常有用， 因为在sftp> 后输入命令， 默认值针对sftp服务器的， 所以执行rm a.txt删除的是sftp服务器上的a.txt文件， 而非本地的linux上的a.txt文件。
+
+     8. exit和quit
+
+
+
+1、列清单
+
+jar tf xxx.jar
+
+2、解压jar中指定文件
+
+jar xf xxx.jar  file.properties
+
+3、修改文件
+
+vim file.properties
+
+4、更新配置到jar
+
+jar uf xxx.jar file.properties

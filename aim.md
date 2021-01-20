@@ -23,3 +23,19 @@ JVM 多线程 设计模式 redis  zookeeper mysql调优
 JUC  /interface  & abstract class/  impl
 
 ​																	
+
+
+
+
+
+2021
+
+1、养小孩清单，注重家庭。
+
+2、多线程，基础，SB/SC
+
+3、自研小项目
+
+4、1000KM+1场马拉松
+
+5、还清外债（已有贷款除外）
