@@ -419,3 +419,9 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 五种般若：实相般若/境界般若/文字般若/方便般若/眷属般若 内涵：金刚般若。 般若：了解道、悟道修证、了脱生死、超凡入圣的智慧
 
 黄帝内经：上药：精气神
+
+
+
+增广贤文
+
+昔时贤文，诲汝谆谆，集韵增文，多见多闻。

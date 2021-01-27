@@ -944,3 +944,17 @@ javac Hello.java
 java -c Hello
 
 javap -verbose Hello   
+
+
+
+
+
+java常用命令
+
+javac Test.java 编译
+
+java Test 执行
+
+jar xf test.jar 解包
+
+jar cvf package.jar file1 file2 folder1 folder2 压包
