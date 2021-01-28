@@ -425,3 +425,6 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 增广贤文
 
 昔时贤文，诲汝谆谆，集韵增文，多见多闻。
+
+
+举而措之天下之民谓之事业  -易  南老
