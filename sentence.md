@@ -434,3 +434,6 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 多关心，多尊重，多鼓励 
 少猜疑，少指责，少翻旧账 
 多想对方的好处，体谅对方的难处，包容对方的短处
+人性：  体：来源 相：善/恶/无记 用：道理 立法
+
+
