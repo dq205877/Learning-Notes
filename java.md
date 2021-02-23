@@ -958,3 +958,167 @@ java Test 执行
 jar xf test.jar 解包
 
 jar cvf package.jar file1 file2 folder1 folder2 压包
+
+
+
+HashMap解析：
+
+![preview](https://pic3.zhimg.com/v2-8cf9331314f6e50ea96de543d706c076_r.jpg)
+
+
+
+
+
+```java
+//Rotate Left  treeMap左旋
+private void rotateLeft(Entry<K,V> p) {
+    if (p != null) {
+        Entry<K,V> r = p.right; //10  p是3 r是10
+        p.right = r.left;  //10左给3右
+        if (r.left != null) //10左不空 10左父为3
+            r.left.parent = p;
+        r.parent = p.parent;  //3父赋给10父 左旋完成
+        if (p.parent == null)  //3父为空则根节点是10
+            root = r;
+        else if (p.parent.left == p)//3父节点的左节点为本身则其为10左节点
+            p.parent.left = r;
+        else                        //其他情况10的右节点为3
+            p.parent.right = r;
+        r.left = p; //10左为3
+        p.parent = r;//3父为10
+    }
+}//总结：左旋是左节点变父节点，左节点（父节点）的右节点变其（原父节点）的左节点
+```
+
+**红黑树是一种近似平衡的二叉查找树，它能够确保任何一个节点的左右子树的高度差不会超过二者中较低那个的一陪**。具体来说，红黑树是满足如下条件的二叉查找树（binary search tree）：
+
+1. 每个节点要么是红色，要么是黑色。
+2. 根节点必须是黑色
+3. 红色节点不能连续（也即是，红色节点的孩子和父亲都不能是红色）。
+4. 对于每个节点，从该点至null（树尾端）的任何路径，都含有相同个数的黑色节点。
+
+```java
+//红黑树调整函数fixAfterInsertion() 就是通过左右旋来调整使树满足上面四个条件
+private void fixAfterInsertion(Entry<K,V> x) {
+    x.color = RED;
+    while (x != null && x != root && x.parent.color == RED) {
+        if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
+            Entry<K,V> y = rightOf(parentOf(parentOf(x)));
+            if (colorOf(y) == RED) {//如果y为null，则视为BLACK
+                setColor(parentOf(x), BLACK);              // 情况1
+                setColor(y, BLACK);                        // 情况1
+                setColor(parentOf(parentOf(x)), RED);      // 情况1
+                x = parentOf(parentOf(x));                 // 情况1
+            } else {
+                if (x == rightOf(parentOf(x))) {
+                    x = parentOf(x);                       // 情况2
+                    rotateLeft(x);                         // 情况2
+                }
+                setColor(parentOf(x), BLACK);              // 情况3
+                setColor(parentOf(parentOf(x)), RED);      // 情况3
+                rotateRight(parentOf(parentOf(x)));        // 情况3
+            }
+        } else {
+            Entry<K,V> y = leftOf(parentOf(parentOf(x)));
+            if (colorOf(y) == RED) {
+                setColor(parentOf(x), BLACK);              // 情况4
+                setColor(y, BLACK);                        // 情况4
+                setColor(parentOf(parentOf(x)), RED);      // 情况4
+                x = parentOf(parentOf(x));                 // 情况4
+            } else {
+                if (x == leftOf(parentOf(x))) {
+                    x = parentOf(x);                       // 情况5
+                    rotateRight(x);                        // 情况5
+                }
+                setColor(parentOf(x), BLACK);              // 情况6
+                setColor(parentOf(parentOf(x)), RED);      // 情况6
+                rotateLeft(parentOf(parentOf(x)));         // 情况6
+            }
+        }
+    }
+    root.color = BLACK;
+}
+```
+
+hashMap大部分摘自https://zhuanlan.zhihu.com/p/24795143
+
+
+
+HashMap的put方法执行过程可以通过下图来理解，自己有兴趣可以去对比源码更清楚地研究学习。
+
+![img](https://pic3.zhimg.com/80/58e67eae921e4b431782c07444af824e_hd.jpg)
+
+①.判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容；
+
+②.根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③；
+
+③.判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals；
+
+④.判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则转向⑤；
+
+⑤.遍历table[i]，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现key已经存在直接覆盖value即可；
+
+⑥.插入成功后，判断实际存在的键值对数量size是否超多了最大容量threshold，如果超过，进行扩容。
+
+JDK1.8HashMap的put方法源码如下:
+
+```java
+ 1 public V put(K key, V value) {
+ 2     // 对key的hashCode()做hash
+ 3     return putVal(hash(key), key, value, false, true);
+ 4 }
+ 5 
+ 6 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+ 7                boolean evict) {
+ 8     Node<K,V>[] tab; Node<K,V> p; int n, i;
+ 9     // 步骤①：tab为空则创建
+10     if ((tab = table) == null || (n = tab.length) == 0)
+11         n = (tab = resize()).length;
+12     // 步骤②：计算index，并对null做处理 
+13     if ((p = tab[i = (n - 1) & hash]) == null) 
+14         tab[i] = newNode(hash, key, value, null);
+15     else {
+16         Node<K,V> e; K k;
+17         // 步骤③：节点key存在，直接覆盖value
+18         if (p.hash == hash &&
+19             ((k = p.key) == key || (key != null && key.equals(k))))
+20             e = p;
+21         // 步骤④：判断该链为红黑树
+22         else if (p instanceof TreeNode)
+23             e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+24         // 步骤⑤：该链为链表
+25         else {
+26             for (int binCount = 0; ; ++binCount) {
+27                 if ((e = p.next) == null) {
+28                     p.next = newNode(hash, key,value,null);
+                        //链表长度大于8转换为红黑树进行处理
+29                     if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st  
+30                         treeifyBin(tab, hash);
+31                     break;
+32                 }
+                    // key已经存在直接覆盖value
+33                 if (e.hash == hash &&
+34                     ((k = e.key) == key || (key != null && key.equals(k))))                                          break;
+36                 p = e;
+37             }
+38         }
+39         
+40         if (e != null) { // existing mapping for key
+41             V oldValue = e.value;
+42             if (!onlyIfAbsent || oldValue == null)
+43                 e.value = value;
+44             afterNodeAccess(e);
+45             return oldValue;
+46         }
+47     }
+
+48     ++modCount;
+49     // 步骤⑥：超过最大容量 就扩容
+50     if (++size > threshold)
+51         resize();
+52     afterNodeInsertion(evict);
+53     return null;
+54 }
+```
+
+https://www.baidu.com/link?url=FC7O2yK4kVlZ6L8hkC97rQN0Td2HiRGnhj_vLtkScClL8SQzt9LotBto3ew_N9jsWneEdI67q93Eh0w5nldzWq&wd=&eqid=cc458b020004a14a00000004601a4570

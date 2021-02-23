@@ -74,3 +74,17 @@ no blank in tnsnames.ora for names
 
 
 
+
+
+Git
+
+describe1: git clone error
+
+error: RPC failed; curl 56 OpenSSL SSL_read: Connection was reset, errno 10054
+fatal: the remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+
+solution1:
+
+git config --global http.postBuffer 524288000

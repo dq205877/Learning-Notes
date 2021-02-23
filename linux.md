@@ -311,3 +311,13 @@ vim file.properties
 4、更新配置到jar
 
 jar uf xxx.jar file.properties
+
+
+
+查看端口被哪个程序占用
+
+lsof -i:port
+
+cd /proc/pid
+
+ls -ail

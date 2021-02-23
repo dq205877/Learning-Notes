@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/algorithm.iml" filepath="$PROJECT_DIR$/algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/awtTree/awtTree.iml" filepath="$PROJECT_DIR$/awtTree/awtTree.iml" />
     </modules>
   </component>
 </project>
