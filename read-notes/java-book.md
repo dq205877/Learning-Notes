@@ -211,3 +211,226 @@ SOA（Service-Oriented Architecture）：1、信息孤岛（信息互通） 2、
 第九章 RocketMQ分布式消息通信
 
 第十章 微服务网关之Spring Cloud Gateway
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Java与模式	-阎宏
+
+## 第一部分  UML和模式介绍
+
+#### 第一章  模式的简史和形而上学
+
+模式：问题及解决方案重复出现，不同面孔有**共同的本质**就是模式。
+
+质：QWAN    无名质The Quality Without a Name ;
+
+包括   整体性 wholeness 完备性completeness 舒适性comfort  和谐性harmony 可居住性 habitability
+
+持久性durability 开放性openness 可变性variability 可塑性 adaptability等 。
+
+QWAN是建筑设计依据的原始根据，定义的“质”是一切工程设计的开始。
+
+门：
+
+道：The Timeless Way 永恒之道
+
+java源码/气/门  道/定义/组合  系统/体/质
+
+用道由气变质  气变‘形’  形即模式
+
+
+
+模式的**要素**：
+
+名字 Name
+
+问题 Problem
+
+环境或初始环境 Context / Initial Context 模式问题及解答的前提条件
+
+力 Forces  力给出与模式相关的力和约束
+
+解答  Solution
+
+举例 Examples
+
+末态环境 Resulting Context 应用模式后的结果
+
+推理 Rationale 解释模式步骤、规则
+
+其他有关模式 Related Patterns 与其他模式的静态和动态的关系
+
+已知的应用 Know Uses
+
+
+
+一个模式**应当包含**所有要素。
+
+
+
+讲解模式**格式**
+
+介绍/结构/长短处/什么情况使用/实现的讨论/举例/相关模式
+
+
+
+#### 第二章 统一建模语言UML简介 
+
+统一建模语言 Unified Modeling Language
+
+对软件系统来说 UML功能
+
+可视化功能 Visualizing
+
+说明功能     Specifying
+
+建造功能     Constructing
+
+建文档功能  Documenting
+
+
+
+UML包括以下的图：
+
+使用案例图 Use case diagrams
+
+类图             Class diagrams
+
+序列图          Sequence diagrams
+
+合作图          Collaboration diagrams
+
+状态图           Statechart diagrams
+
+活动图			Activity diagrams
+
+构件图			 Component diagrams
+
+部署图             Deployment diagrams
+
+
+
+## 第二部分  面向对象的设计原则 
+
+#### 第三章 软件的可维护性与可复用性 
+
+支持可维护性(Maintainability)同时，提高系统可复用性(Reuseability)是一个核心问题。
+
+导致可维护性较低的真正原因：过于僵硬(Rigidity)、过于脆弱(Fragility)、复用率低(Immobility)、黏性过高(Viscosity)
+
+设计的目标：可扩展性(Extensibility)、灵活性(Flexibility)、可插入性(Pluggability)
+
+设计原则：
+
+“开－闭”原则（Open-Closed Principle,OCP）
+
+里氏代换原则（Liskov Substitution Principle,LSP）
+
+依赖倒转原则（Dependency Inversion Principle,DSP）
+
+接口隔离原则（Interface Segregation Principle,ISP）
+
+组合/聚合利用原则（Composition/Aggregation Principle,CARP）
+
+迪米特法则（Law of Demeter,LoD）
+
+
+
+**开闭原则：**
+
+在设计模块时，可不修改前提下被扩展，或不修改源代码下改变模块的行为。
+
+1. 提供新行为，满足新需求，使变化的系统有一定的适应性和灵活性。
+2. 已有模块，特别重要的抽象层模块不能再修改，使变化的系统有一定的稳定性和延续性。
+
+抽象化是关键：抽象可变实现，满足1,抽象不变，满足2。
+
+对可变性的封装原则，开闭的另一角度（Principle of Encapsulation of Variation，常常略写为EVP）
+
+1. 一种可变性不应散落在很多角落，可变性表象在同层级的具体子类
+2. 一种可变性不应与另一种可变性混合，设计模式的类图一般都不会超过两层。
+
+**里氏代换原则：**
+
+任何基类可出现的地方，子类一定可以出现。是对开闭原则的补充。是对实现抽象化的具体步骤的规范。一般来说，违反里氏，也违背了开闭，反之不一定成立。
+
+**依赖倒转原则：**
+
+依赖抽象，不要依赖于实现。
+
+与开闭原则是目标和手段的关系，开闭原则是目标，手段是依赖倒转原则。
+
+**合成/聚合复用原则：**
+
+尽量使用合成/聚合，而不继承达到复用目的。
+
+优先使用合成/聚合，里氏代换需符合一定条件。与里氏相辅相成实现开闭目标。
+
+遵守合成/聚合是实现开闭的必要条件，违反无法实现目标。
+
+**迪米特法则：**
+
+一个软件实体尽可能少与其他实体相互作用。
+
+即模块修改尽可能不要传递，相对孤立，相对更容易做到对修改的关闭，是通向开闭的道路。
+
+**接口隔离原则：**
+
+尽可能提供小而单独的接口
+
+与迪米特都是对软件实体的通信限制，广义迪米特尽可能限制通信的宽度和深度，接口则是限制通过的宽度，通信尽可能的窄。遵守迪米特和接口隔离，显然的将修改压力更不会传递到其他的实体。
+
+
+
+所有设计模式对不同的可变性封装，使系统在不同角度上满足开闭原则的要求。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

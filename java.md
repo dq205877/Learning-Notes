@@ -1,6 +1,10 @@
 人际交往+技术本质+业务深度+行业应用天花板＝年薪
 追踪到C，到数据库，到OS。
 
+架构设计＝操作系统+java core+框架+计算机网络
+
+框架＝注解+反射+设计模式
+
 算法：解决方案：
 
 特性  输入：输出：有穷性、确定性、可行性
@@ -788,6 +792,34 @@ Seata		分布式事务
 ```
 											Redis
 ```
+
+Windows
+
+redis-server.exe redis.windows.conf
+
+redis-cli -h 127.0.0.1 -p 6379
+
+
+
+
+
+
+
+​    redis-server --service-install redis.windows.conf //安装服务
+​    redis-server --service-start //启动服务
+​    redis-server --service-stop //停止服务
+​    redis-server --service-uninstall //卸载服务
+
+
+
+
+
+\1. redis-cli.exe
+\2. shutdown
+\3. exit
+\4. redis-server.exe redis.windows.conf
+
+
 
 Redis是一款基于键值对的NoSQL数据库，它的值支持多种数据结构：
 
