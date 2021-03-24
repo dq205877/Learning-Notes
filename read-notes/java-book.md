@@ -462,17 +462,31 @@ UML包括以下的图：
 
 #### 第二章  NIO
 
+![image-20210324165437530](D:\Git-Center\Learning-Notes\source\static\images\io2.png)
 
+![image-20210324165706462](D:\Git-Center\Learning-Notes\source\static\images\nio2.png)
 
+jdk1.7 java.nio.file.WatchService 文件监控
 
+![image-20210324170537090](D:\Git-Center\Learning-Notes\source\static\images\nio-WatchService.png)
 
-#### 第三单 依赖注入
+SeekableByteChannel
 
+![image-20210324170755655](D:\Git-Center\Learning-Notes\source\static\images\Interface_SeekableByteChannel.png)
 
+**NIO**
 
-
+![image-20210324171049572](D:\Git-Center\Learning-Notes\source\static\images\nio-jdk1.7API.png)
 
 ## 第二部分  关键技术
+
+#### 第三章 依赖注入
+
+![image-20210324172026336](D:\Git-Center\Learning-Notes\source\static\images\IOC好莱坞原则.png)
+
+![image-20210324172221251](D:\Git-Center\Learning-Notes\source\static\images\依赖注入，控制反转的实现方式之一.png)
+
+
 
 #### 第四章  现代并发
 
