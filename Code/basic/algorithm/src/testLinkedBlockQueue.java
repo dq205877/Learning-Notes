@@ -21,8 +21,9 @@ public class testLinkedBlockQueue {
     *
     * */
 
-    static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(5);
+    static LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(600000);
     static volatile Integer pi=0;
+    static volatile Integer creatSum=0,consumerSum=0;
     public static void main(String[] args) {
         Thread thread = new Thread(() -> create(pi));
         Thread thread1 = new Thread(()->consumer());
@@ -31,16 +32,21 @@ public class testLinkedBlockQueue {
 
     }
 
-    public static void create(Integer i){
+    public static synchronized void create(Integer i){//要用到synchronized关键字，锁定哪个对象就用哪个对象来执行notify(), notifyAll(),wait(), wait(long), wait(long, int)操作，否则就会报IllegalMonitorStateException异常。
         while (true){
-//            linkedBlockingQueue.offer(i++);
-//            pi++;
+            pi++;
+//            linkedBlockingQueue.offer(pi);
             try {
-                pi++;
                 System.out.println(pi);
-            linkedBlockingQueue.put(i);
-                System.out.println("create:"+i);
+            linkedBlockingQueue.put(pi);
+                creatSum= creatSum+pi;
+                System.out.println("create:"+creatSum);
             System.out.println("size:"+linkedBlockingQueue.size());
+            if(pi==666666666){
+                testLinkedBlockQueue.class.wait();
+                //Thread.currentThread().getClass().wait();
+            }
+//                Thread.sleep(2000);
             }catch (InterruptedException e){}
         }
     }
@@ -48,9 +54,11 @@ public class testLinkedBlockQueue {
         while (true){
             try {
 
-                Thread.sleep(1000);
-                System.out.println("consumer:"+linkedBlockingQueue.take());
-                pi--;
+//                Thread.sleep(1000);
+//                System.out.println(linkedBlockingQueue.take()+"----------");
+                consumerSum= consumerSum+(Integer) linkedBlockingQueue.take();
+                System.out.println("consumer:"+consumerSum);
+//                pi--;
             }catch (InterruptedException e){}
         }
     }

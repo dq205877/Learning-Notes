@@ -402,31 +402,117 @@ UML包括以下的图：
 
 
 
+# Java程序员修炼之道 －Ben Evans
+
+## 第一部分  用Java 7做开发
+
+#### 第一章  初识java7
+
+![image-20210317154405378](D:\Git-Center\Learning-Notes\source\static\images\java7change.png)
+
+![image-20210317154019691](D:\Git-Center\Learning-Notes\source\static\images\classProcess.png)
+
+**变化点：**
+
+1. swtich增加对String的支持。
+
+2. 更强的数值文本表示法
+
+   1.数字常量可用二进制文本表示
+
+   ![image-20210317161938972](D:\Git-Center\Learning-Notes\source\static\images\数可二进制表示.png)
+
+   2.可用下划线分隔
+
+   ![image-20210317162416418](D:\Git-Center\Learning-Notes\source\static\images\数可加下划线.png)
+
+3. 改善后的异常处理
+
+   multicatch和final重抛
+
+   ![image-20210317163305485](D:\Git-Center\Learning-Notes\source\static\images\multicatch.png)
+
+   1. 
+
+   ![image-20210317163434630](D:\Git-Center\Learning-Notes\source\static\images\multicatchPro.png)
+
+   ![image-20210317163612008](D:\Git-Center\Learning-Notes\source\static\images\finalCatch.png)
+
+4. try-with-resources(TWR)
+
+![](D:\Git-Center\Learning-Notes\source\static\images\try-with-resources.png)
+
+![image-20210317171033762](D:\Git-Center\Learning-Notes\source\static\images\TWR.png)
+
+5.钻石语法
+
+创建泛型定义和实例太过繁琐，可在声明时new省咯，编译器会用前面推断后面
+
+![image-20210317172459779](D:\Git-Center\Learning-Notes\source\static\images\dimondGrammer.png)
+
+6.简化变参方法调用
+
+去掉方法签名中**同时出现**泛型和变参的警告
+
+![image-20210317192434275](D:\Git-Center\Learning-Notes\source\static\images\SafeVarargs.png)
+
+
+
+*JSR*: *JSR*是Java Specification Requests的缩写,意思是“Java 规范提案”。
+
+#### 第二章  NIO
 
 
 
 
 
+#### 第三单 依赖注入
 
 
 
 
 
+## 第二部分  关键技术
+
+#### 第四章  现代并发
+
+![image-20210318193451752](D:\Git-Center\Learning-Notes\source\static\images\concurrent.png)
 
 
 
+![image-20210318193746994](D:\Git-Center\Learning-Notes\source\static\images\concurrent_warn.png)
 
 
 
+**系统开销来源**
+
+锁与监测/环境切换/线程个数/调度/内存的局部性/算法设计
+
+#### 第五章 类文件与字节码
 
 
 
+#### 第六章 理解性能调优
 
 
 
+1. 性能术语
 
+   等待时间  Latency
 
+   吞吐量      Throughput
 
+   利用率	   Utilization
+
+   效率           Efiiciency
+
+   容量            Capacity
+
+   扩展性         Scalability
+
+   退化             Degradation
+
+2. 短时间用nanoTime(),长时间要用currentTimeMills()校准。
 
 
 

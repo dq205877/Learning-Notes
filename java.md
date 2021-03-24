@@ -1154,3 +1154,40 @@ JDK1.8HashMap的put方法源码如下:
 ```
 
 https://www.baidu.com/link?url=FC7O2yK4kVlZ6L8hkC97rQN0Td2HiRGnhj_vLtkScClL8SQzt9LotBto3ew_N9jsWneEdI67q93Eh0w5nldzWq&wd=&eqid=cc458b020004a14a00000004601a4570
+
+
+
+
+
+
+
+
+
+## MyBatis 流程
+
+1. 创建 SqlSessionFactory 对象。
+2. SqlSessionFactory 获取 SqlSession 对象。
+3. SqlSession 获得 Mapper 代理对象。
+4. Mapper 代理对象，执行数据库操作。
+5. 执行成功，则使用 SqlSession 提交事务。
+6. 执行失败，则使用 SqlSession 回滚事务。
+7. 关闭会话。
+
+
+
+
+
+## Mybatis 都有哪些 Executor 执行器？它们之间的区别是什么？
+
+Mybatis 有四种 Executor 执行器，分别是 SimpleExecutor、ReuseExecutor、BatchExecutor、CachingExecutor 。
+
+- SimpleExecutor ：每执行一次 update 或 select 操作，就创建一个 Statement 对象，用完立刻关闭 Statement 对象。
+- ReuseExecutor ：执行 update 或 select 操作，以 SQL 作为key 查找**缓存**的 Statement 对象，存在就使用，不存在就创建；用完后，不关闭 Statement 对象，而是放置于缓存 `Map` 内，供下一次使用。简言之，就是重复使用 Statement 对象。
+- BatchExecutor ：执行 update 操作（没有 select 操作，因为 JDBC 批处理不支持 select 操作），将所有 SQL 都添加到批处理中（通过 addBatch 方法），等待统一执行（使用 executeBatch 方法）。它缓存了多个 Statement 对象，每个 Statement 对象都是调用 addBatch 方法完毕后，等待一次执行 executeBatch 批处理。**实际上，整个过程与 JDBC 批处理是相同**。
+- CachingExecutor ：在上述的三个执行器之上，增加**二级缓存**的功能。
+
+------
+
+通过设置 `` 的 `"value"` 属性，可传入 SIMPLE、REUSE、BATCH 三个值，分别使用 SimpleExecutor、ReuseExecutor、BatchExecutor 执行器。
+
+通过设置 ` 的 `"value"` 属性为 `true` 时，创建 CachingExecutor 执行器。
