@@ -530,7 +530,11 @@ SeekableByteChannel
 
 
 
+# Refactoring  Improving the Design of Existing Code -Martin Fowler 
 
+# 重构 改善即有代码的设计  熊节  译
+
+#### 第一章  重构，第一个案例
 
 
 

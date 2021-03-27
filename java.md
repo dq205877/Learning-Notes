@@ -973,9 +973,13 @@ javac Hello.java
 
 --查看字节码
 
-java -c Hello
+javap -c Hello
 
 javap -verbose Hello   
+
+
+
+javap -c Hello 将字节码反编译为字节码指令输出
 
 
 
