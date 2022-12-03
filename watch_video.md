@@ -41,3 +41,17 @@ javac->.class->类加载器
 ArrayList batchRemove->retailAll 读写指针，代码复用。
 
 LinkedList head/tail相同，队列为null,头指针加1等于尾指针，队列已满。逻辑连续，地址不连续。
+
+
+
+
+
+
+
+
+
+高并发上：
+
+​		进程是操作系统分配资源的基本单位
+
+​		线程是CPU调度的基本单位

@@ -94,17 +94,22 @@ NK:上述SQL采用范围条件时（WHERE），InnoDB对不存在的记录自动
 
 
 1、spring事务注解？
-
- 答对了Transtional
 2、过滤器和拦截器的区别？
-
- 不知道
 3、分页实现？
 
- 说真分页假分页 mysql limit 10,19 错了，limit 10,10。虽然记录了下标不是从1开始。
-4、mybatis循环？
+totalCount
 
- 没答上，虽然用过foreach
+totalPage 
+
+currentPage 当前页码 
+
+rows 条数
+
+List<>
+
+offset (currentPage-1)*rows
+
+4、mybatis循环？
 
 
 
@@ -930,3 +935,117 @@ public class MyStack {
 11、Java集合框架的基础接口有Set, List, Map,简要说明各有哪些实现类，并说明其区别
 
 12、同步方法与同步代码块的区别
+
+
+
+
+
+20210518
+
+```java
+ public static void main(String[] args) {
+ 		List<String> list = new ArrayList<>(Arrays.asList("a1", "ab2", "a3", "ab4", "a5"));
+
+   /**
+     * 正常删除，推荐使用
+     */
+    for (Iterator<String> ite = list.iterator(); ite.hasNext();) {
+        String str = ite.next();
+        if (str.contains("b")) {
+            ite.remove();
+        }
+    }
+   
+   /**
+     * 正常删除，每次调用size方法，损耗性能，不推荐
+     */
+    for (int i = 0; i < list.size(); i++) {
+        String str = list.get(i);
+        if (str.contains("b")) {
+            list.remove(i);
+        }
+    }
+
+    /**
+     * 报错
+     * java.util.ConcurrentModificationException
+     */
+    for (String str : list) {
+        if (str.contains("b")) {
+            list.remove(str);
+        }
+    }
+
+    /**
+     * 报错：下标越界
+     * java.lang.IndexOutOfBoundsException
+     * 动态删除了元素导致数组下标越界了
+     */
+    int size = list.size();
+    for (int i = 0; i < size; i++) {
+        String str = list.get(i);
+        if (str.contains("b")) {
+            list.remove(i);
+        }
+    }
+
+    /**
+     * 报错
+     * java.util.ConcurrentModificationException
+     */
+    for (Iterator<String> ite = list.iterator(); ite.hasNext();) {
+        String str = ite.next();
+        if (str.contains("b")) {
+            list.remove(str);
+        }
+    }
+}
+```
+
+
+
+
+
+线程池  execute方法的底层源码：
+
+```
+public void execute(Runnable command) {
+    if (command == null)
+        throw new NullPointerException();
+    int c = ctl.get();
+    if (workerCountOf(c) < corePoolSize) {
+        if (addWorker(command, true))
+            return;
+        c = ctl.get();
+    }
+    if (isRunning(c) && workQueue.offer(command)) {
+        int recheck = ctl.get();
+        if (! isRunning(recheck) && remove(command))
+            reject(command);
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    }
+    else if (!addWorker(command, false))
+        reject(command);
+}
+```
+
+源码解读：
+
+> 1. int c = ctl.get();
+>
+> private final AtomicInteger ctl = new AtomicInteger(*ctlOf*(*RUNNING*, 0));
+>
+> 线程池运行过程当中，涉及到线程池生命状态、活动线程数的改变，为了保证原子性，用Int类型(32位)的     来表示，高三位代表线程池的生命状态，低29位代表活动线程数。
+>
+> 1. if (workerCountOf(c) < corePoolSize)
+>
+> 判断活动线程数是否小于核心线程数，小于添加任务并返回。
+>
+> 1. if (isRunning(c) && workQueue.offer(command))
+>
+> 如果大于等于核心线程数，判断是否正常运行并且是否添加队列成功，如果是，继续判断，如果不是正常     运行移除队列并执行拒绝策略，如果否添加任务 addWorker(null, false);注意参数false的意思是在Worker中     是与最大线程数做对比的。
+>
+> 1. else if (!addWorker(command, false))
+>
+> 执行到这里代表，1.线程池不是Running状态了；2.核心线程数满并且等待队列也满了，这里的执行结果如     果成功，表示使用的非核心线程执行的，如果失败，执行拒绝策略。

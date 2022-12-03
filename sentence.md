@@ -437,3 +437,17 @@ Opportunity is missed by most people because it is dressed in overalls and looks
 人性：  体：来源 相：善/恶/无记 用：道理 立法
 
 
+
+好上加好 精益求精 不到绝顶 永远不停
+
+good better best,never let it rest,Till good is better.And better best.  许渊冲 20210601
+
+
+
+
+
+与智者言，依于博；与博者言，依于辨；与辨者言，依于要；与贵者言，依于势；与富者言，依于高；与贫者言，依于利；与贱者言，依于谦；与勇者言，依于敢；与过者言，依于锐。　　--《鬼谷子·权篇》
+
+
+
+不如意事常八九，可与语人无二三。自识荆门子才甫，梦驰铁马战城南。-方岳 南宋
