@@ -231,6 +231,22 @@ cp file1 file2 复制一个文件
 
 
 
+查看文件前面20行
+
+head -n 20 filename
+
+查看文件后面20行
+
+tail -n 20 filename
+
+查看文件30－50行
+
+head -50 filename |tail -21
+
+查看某个关键字上下文10行
+
+grep -C 10 keyword filename
+
 
 
 **2>/dev/null**
